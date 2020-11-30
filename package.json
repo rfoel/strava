@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/rfoel/strava.git"
   },
-  "keywords": [],
+  "keywords": [
+    "strava",
+    "api",
+    "client",
+    "node"
+  ],
   "author": "Rafael Franco <rafaelfr@outlook.com>",
   "license": "MIT",
   "bugs": {
@@ -33,6 +38,7 @@
     "@semantic-release/github": "^7.1.1",
     "@semantic-release/npm": "^7.0.6",
     "@semantic-release/release-notes-generator": "^9.0.1",
+    "@types/node-fetch": "^2.5.7",
     "jest": "^26.6.3",
     "microbundle": "^0.12.4",
     "nock": "^13.0.5",
