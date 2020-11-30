@@ -1,12 +1,15 @@
-import { OAuth } from './oauth'
 import { Request } from './request'
+import { Activities } from './resources'
+import { Config } from './types'
 
-export default class Strava {
+export class Strava {
   private readonly request: Request
-  oauth: OAuth
+  activities: Activities
 
-  constructor(apiKey: string) {
-    this.request = new Request()
-    this.oauth = new OAuth(this.request)
+  constructor(config: Config) {
+    this.request = new Request(config)
+    this.activities = new Activities(this.request)
   }
 }
+
+export default Strava
