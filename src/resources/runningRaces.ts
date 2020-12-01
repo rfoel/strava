@@ -1,4 +1,4 @@
-import { Route, RunningRace } from '../models'
+import { RunningRace } from '../models'
 
 import { Request } from '../request'
 
