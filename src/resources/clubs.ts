@@ -1,10 +1,5 @@
-import { ActivityType } from '../enums'
 import {
-  ActivityZone,
-  Comment,
-  DetailedActivity,
   DetailedClub,
-  Lap,
   SummaryActivity,
   SummaryAthlete,
   SummaryClub,
