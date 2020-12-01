@@ -1,7 +1,7 @@
 import fetch from 'node-fetch'
 
 import { StravaError } from './errors'
-import { Config, RefreshTokenRequest, RefreshTokenResponse } from './types'
+import { RefreshTokenRequest, RefreshTokenResponse } from './types'
 
 type RequestParams = {
   query?: any
@@ -9,10 +9,10 @@ type RequestParams = {
 }
 
 export class Request {
-  config: Config
+  config: RefreshTokenRequest
   response: RefreshTokenResponse
 
-  constructor(config: Config) {
+  constructor(config: RefreshTokenRequest) {
     this.config = config
   }
 

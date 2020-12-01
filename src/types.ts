@@ -1,9 +1,3 @@
-export interface Config {
-  client_id: string
-  client_secret: string
-  refresh_token: string
-}
-
 export interface RefreshTokenRequest {
   client_id: string
   client_secret: string
