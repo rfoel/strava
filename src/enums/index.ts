@@ -1,6 +1,7 @@
 export * from './activityType'
 export * from './activityZoneType'
 export * from './followerStatus'
+export * from './membership'
 export * from './resourceState'
 export * from './sex'
 export * from './sportType'
