@@ -47,18 +47,21 @@ export class Request {
   public async makeApiRequest<Response>(
     method: string,
     uri: string,
-    params: RequestParams,
+    params?: RequestParams,
   ): Promise<Response> {
     try {
       await this.getAccessToken()
 
-      const query: string = new URLSearchParams(params.query).toString()
+      const query: string = new URLSearchParams(params?.query).toString()
       const response = await fetch(
         `https://www.strava.com/api/v3${uri}?${query}`,
         {
-          body: params.body,
+          body: JSON.stringify(params?.body),
           method,
-          headers: { Authorization: `Bearer ${this.response.access_token}` },
+          headers: {
+            Authorization: `Bearer ${this.response.access_token}`,
+            'Content-Type': 'application/json',
+          },
         },
       )
 
