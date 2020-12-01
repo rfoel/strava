@@ -1,5 +1,12 @@
 import { Request } from './request'
-import { Activities, Athletes, Clubs, Gears, Routes } from './resources'
+import {
+  Activities,
+  Athletes,
+  Clubs,
+  Gears,
+  Routes,
+  RunningRaces,
+} from './resources'
 import { RefreshTokenRequest } from './types'
 
 export class Strava {
@@ -9,6 +16,7 @@ export class Strava {
   clubs: Clubs
   gears: Gears
   routes: Routes
+  runningRaces: RunningRaces
 
   constructor(config: RefreshTokenRequest) {
     this.request = new Request(config)
@@ -17,5 +25,6 @@ export class Strava {
     this.clubs = new Clubs(this.request)
     this.gears = new Gears(this.request)
     this.routes = new Routes(this.request)
+    this.runningRaces = new RunningRaces(this.request)
   }
 }
