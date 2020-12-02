@@ -1,5 +1,4 @@
 import { RunningRace } from '../models'
-
 import { Request } from '../request'
 
 type GetRunningRaceByIdRequest = {

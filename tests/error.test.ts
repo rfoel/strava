@@ -1,5 +1,5 @@
 import * as nock from 'nock'
-import Strava from '../src'
+import { Strava } from '../src'
 import { StravaError } from '../src/errors'
 
 const scope = nock('https://www.strava.com')

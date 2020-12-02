@@ -1,5 +1,4 @@
 import { DetailedSegmentEffort } from '../models'
-
 import { Request } from '../request'
 
 type GetEffortsBySegmentIdRequest = {

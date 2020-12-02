@@ -1,5 +1,4 @@
 import { Route } from '../models'
-
 import { Request } from '../request'
 
 type GetRouteAsGPXRequest = {
