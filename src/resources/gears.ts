@@ -1,7 +1,7 @@
 import { DetailedGear } from '../models'
 import { Request } from '../request'
 
-type getGearById = {
+type getGearByIdRequest = {
   id: number
 }
 
@@ -12,7 +12,7 @@ export class Gears {
     this.request = request
   }
 
-  async getGearById(params: getGearById): Promise<DetailedGear> {
+  async getGearById(params: getGearByIdRequest): Promise<DetailedGear> {
     const { id } = params
     return await this.request.makeApiRequest<DetailedGear>('get', `/gear/${id}`)
   }
