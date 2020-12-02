@@ -21,6 +21,31 @@ or
 yarn add strava
 ```
 
+## Usage
+
+The way the library is implemented the user must have gone through the [Strava OAuth flow](https://developers.strava.com/docs/authentication/) beforehand and got a refresh token. This way we can ensure that whenever needed we get a new access token.
+
+This may not be the best way to work with the API and I'm open to suggestion to make it better.
+
+```javascript
+import { Strava } from 'strava'
+
+const strava = new Strava({
+  client_id: '123',
+  client_secret: 'abc',
+  refresh_token: 'def',
+})
+
+;(async () => {
+  try {
+    const activities = await strava.activities.getLoggedInAthleteActivities()
+    console.log(activities)
+  } catch (error) {
+    console.log(error)
+  }
+})()
+```
+
 ## Contributing
 
 Issues and pull requests are welcome.

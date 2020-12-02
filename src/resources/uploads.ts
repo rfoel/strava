@@ -1,4 +1,4 @@
-import { DetailedGear, Upload } from '../models'
+import { Upload } from '../models'
 import { Request } from '../request'
 
 type createUploadRequest = {
