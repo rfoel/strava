@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/rfoel/strava/compare/v1.1.0...v1.1.1) (2020-12-07)
+
+
+### Bug Fixes
+
+* export types ([826a6db](https://github.com/rfoel/strava/commit/826a6db0fcc82151538e389b2c2e2fa2e05af77d))
+
 # [1.1.0](https://github.com/rfoel/strava/compare/v1.0.0...v1.1.0) (2020-12-02)
 
 
