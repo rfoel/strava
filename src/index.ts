@@ -13,6 +13,9 @@ import {
 } from './resources'
 import { RefreshTokenRequest } from './types'
 
+export * from './enums'
+export * from './models'
+
 export class Strava {
   private readonly request: Request
   activities: Activities
