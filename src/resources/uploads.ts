@@ -1,8 +1,10 @@
+import { Blob } from 'node-fetch'
+
 import { Upload } from '../models'
 import { Request } from '../request'
 
 type createUploadRequest = {
-  file: File
+  file: Blob
   name: string
   description: string
   trainer: string

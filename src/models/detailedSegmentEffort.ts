@@ -1,25 +1,20 @@
-import { MetaActivity, MetaAthlete, SummarySegment } from '.'
+import { ResourceState } from '../enums'
+
+import { Achievement, MetaActivity, MetaAthlete } from '.'
 
 export interface DetailedSegmentEffort {
   id: number
-  elapsed_time: number
-  start_date: Date
-  start_date_local: Date
-  distance: number
-  is_kom: boolean
+  resource_state: ResourceState
   name: string
   activity: MetaActivity
   athlete: MetaAthlete
+  elapsed_time: number
   moving_time: number
+  start_date: string
+  start_date_local: string
+  distance: number
   start_index: number
   end_index: number
-  average_cadence: number
-  average_watts: number
-  device_watts: boolean
-  average_heartrate: number
-  max_heartrate: number
-  segment: SummarySegment
-  kom_rank: number
-  pr_rank: number
-  hidden: boolean
+  pr_rank: string
+  achievements: Achievement[]
 }
