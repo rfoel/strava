@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/rfoel/strava/compare/v1.1.2...v1.1.3) (2020-12-18)
+
+
+### Bug Fixes
+
+* add types to package.json ([baff388](https://github.com/rfoel/strava/commit/baff3886127b80a544f791bbcd262528f19b9163))
+
 ## [1.1.2](https://github.com/rfoel/strava/compare/v1.1.1...v1.1.2) (2020-12-18)
 
 
