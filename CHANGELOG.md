@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/rfoel/strava/compare/v1.1.3...v1.1.4) (2020-12-18)
+
+
+### Bug Fixes
+
+* dates are string types ([759253b](https://github.com/rfoel/strava/commit/759253b416a299f6ef63d7a2358cc4c73ef31585))
+
 ## [1.1.3](https://github.com/rfoel/strava/compare/v1.1.2...v1.1.3) (2020-12-18)
 
 
