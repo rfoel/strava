@@ -3,8 +3,8 @@ import { Request } from '../request'
 
 type GetEffortsBySegmentIdRequest = {
   segment_id: number
-  start_date_local?: Date
-  end_date_local?: Date
+  start_date_local?: string
+  end_date_local?: string
   per_page?: number
 }
 

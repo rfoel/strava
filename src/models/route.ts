@@ -16,8 +16,8 @@ export interface Route {
   timestamp: number
   type: RouteType
   sub_type: RouteSubType
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
   estimated_moving_time: number
   segments: SummarySegment[]
 }

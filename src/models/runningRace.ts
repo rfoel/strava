@@ -5,7 +5,7 @@ export interface RunningRace {
   name: string
   running_race_type: number
   distance: number
-  start_date_local: Date
+  start_date_local: string
   city: string
   state: string
   country: string
