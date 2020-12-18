@@ -1,9 +1,11 @@
 export interface Split {
-  average_speed: number
   distance: number
   elapsed_time: number
   elevation_difference: number
-  pace_zone: number
   moving_time: number
   split: number
+  average_speed: number
+  average_grade_adjusted_speed: number
+  average_heartrate: number
+  pace_zone: number
 }
