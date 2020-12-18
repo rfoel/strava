@@ -6,6 +6,7 @@
   "module": "dist/index.m.js",
   "umd:main": "dist/index.umd.js",
   "source": "src/index.ts",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rfoel/strava.git"
