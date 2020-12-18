@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/rfoel/strava/compare/v1.1.1...v1.1.2) (2020-12-18)
+
+
+### Bug Fixes
+
+* update models ([d3296f8](https://github.com/rfoel/strava/commit/d3296f815c201d1acd21e7948491cf10a41274b0))
+
 ## [1.1.1](https://github.com/rfoel/strava/compare/v1.1.0...v1.1.1) (2020-12-07)
 
 
