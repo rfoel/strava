@@ -14,6 +14,6 @@ export interface SummaryAthlete {
   friend: string
   follower: string
   premium: boolean
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
 }

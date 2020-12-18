@@ -5,5 +5,5 @@ export interface Comment {
   activity_id: number
   text: string
   athlete: SummaryAthlete
-  created_at: Date
+  created_at: string
 }

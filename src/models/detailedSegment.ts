@@ -23,8 +23,8 @@ export interface DetailedSegment {
   private: boolean
   athlete_pr_effort: SummarySegmentEffort
   athlete_segment_stats: SummaryPRSegmentEffort
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
   total_elevation_gain: number
   map: PolylineMap
   effort_count: number

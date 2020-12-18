@@ -16,8 +16,8 @@ export interface DetailedAthlete {
   friend: FollowerStatus
   follower: FollowerStatus
   premium: boolean
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
   follower_count: number
   friend_count: number
   mutual_friend_count: number

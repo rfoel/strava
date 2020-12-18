@@ -12,7 +12,7 @@ import { Request } from '../request'
 type CreateActivityRequest = {
   name: string
   type: ActivityType
-  start_date_local: Date
+  start_date_local: string
   elapsed_time: number
   description?: string
   distance?: number
@@ -56,7 +56,7 @@ type UpdateActivityByIdRequest = {
   id: number
   name: string
   type: ActivityType
-  start_date_local: Date
+  start_date_local: string
   elapsed_time: number
   description?: string
   distance?: number
