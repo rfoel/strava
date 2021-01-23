@@ -1,0 +1,98 @@
+import { Request } from '../request'
+
+type Subscription = {
+    id: number
+}
+
+type SubscriptionCreationRequest = {
+    callback_url: string
+    verify_token: string
+}
+
+type SubscriptionCreationResponse = {
+    id: number
+}
+
+type SubscriptionValidationRequest = {
+    'hub.mode': 'subscribe'
+    'hub.challenge': string
+    'hub.verify_token': string
+}
+
+type SubscriptionValidationResponse = {
+    'hub.challenge': string
+}
+
+export class Subscriptions {
+
+    private readonly request: Request
+
+    constructor(request) {
+      this.request = request
+    }
+
+    async createSubscription(
+        params: SubscriptionCreationRequest
+    ): Promise<SubscriptionCreationResponse> {
+        return this.request.makeApiRequest(
+            'post',
+            'push_subscriptions',
+            {
+                body: {
+                    ...params,
+                    client_id: this.request.config.client_id,
+                    client_secret: this.request.config.client_secret
+                }
+            }
+        )
+    }
+
+    validateSubscriptionRequest(
+        params: SubscriptionValidationRequest,
+        expectedVerifyToken?: string
+    ): SubscriptionValidationResponse {
+        const {
+            'hub.challenge': challenge,
+            'hub.verify_token': token
+        } = params
+
+        if (expectedVerifyToken && (expectedVerifyToken !== token)) {
+            throw new Error(`Verify token do not match
+            expected: ${expectedVerifyToken}
+            received: ${token}`)
+        }
+
+        return {
+            'hub.challenge': challenge
+        }
+    }
+
+    async getSubscriptions (): Promise<Subscription[]> {
+        return this.request.makeApiRequest(
+            'get',
+            '/push_subscriptions',
+            {
+                query: {
+                    client_id: this.request.config.client_id,
+                    client_secret: this.request.config.client_secret
+                }
+            }
+        )
+    }
+
+    async deleteSubscription (
+        id: number
+    ): Promise<any> {
+        return this.request.makeApiRequest(
+            'delete',
+            `/push_subscriptions/${id}`,
+            {
+                body: {
+                    client_id: this.request.config.client_id,
+                    client_secret: this.request.config.client_secret
+                }
+            }
+        )
+    }
+
+}
