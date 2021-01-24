@@ -13,16 +13,6 @@ type SubscriptionCreationResponse = {
     id: number
 }
 
-type SubscriptionValidationRequest = {
-    'hub.mode': 'subscribe'
-    'hub.challenge': string
-    'hub.verify_token': string
-}
-
-type SubscriptionValidationResponse = {
-    'hub.challenge': string
-}
-
 export class Subscriptions {
 
     private readonly request: Request
@@ -36,7 +26,7 @@ export class Subscriptions {
     ): Promise<SubscriptionCreationResponse> {
         return this.request.makeApiRequest(
             'post',
-            'push_subscriptions',
+            '/push_subscriptions',
             {
                 body: {
                     ...params,
@@ -45,26 +35,6 @@ export class Subscriptions {
                 }
             }
         )
-    }
-
-    validateSubscriptionRequest(
-        params: SubscriptionValidationRequest,
-        expectedVerifyToken?: string
-    ): SubscriptionValidationResponse {
-        const {
-            'hub.challenge': challenge,
-            'hub.verify_token': token
-        } = params
-
-        if (expectedVerifyToken && (expectedVerifyToken !== token)) {
-            throw new Error(`Verify token do not match
-            expected: ${expectedVerifyToken}
-            received: ${token}`)
-        }
-
-        return {
-            'hub.challenge': challenge
-        }
     }
 
     async getSubscriptions (): Promise<Subscription[]> {

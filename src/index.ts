@@ -42,7 +42,7 @@ export class Strava {
     this.segmentEfforts = new SegmentEfforts(this.request)
     this.segments = new Segments(this.request)
     this.streams = new Streams(this.request)
-    this.subscriptions = new Subscriptions(this.subscriptions)
+    this.subscriptions = new Subscriptions(this.request)
     this.uploads = new Uploads(this.request)
   }
 }
