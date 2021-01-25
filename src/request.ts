@@ -67,9 +67,9 @@ export class Request {
         throw response
       }
 
-			if (response.status !== 204) {
-				return await response.json();
-			}
+      if (response.status !== 204) {
+        return await response.json()
+      }
     } catch (error) {
       const data = await error.json()
       switch (error.status) {
