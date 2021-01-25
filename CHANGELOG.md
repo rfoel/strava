@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/rfoel/strava/compare/v1.1.4...v1.2.0) (2021-01-25)
+
+
+### Bug Fixes
+
+* update deps ([#21](https://github.com/rfoel/strava/issues/21)) ([22745ec](https://github.com/rfoel/strava/commit/22745ec6de296024defc6fccbabdf684ebe17963)), closes [#19](https://github.com/rfoel/strava/issues/19) [#18](https://github.com/rfoel/strava/issues/18) [#15](https://github.com/rfoel/strava/issues/15) [#14](https://github.com/rfoel/strava/issues/14) [#11](https://github.com/rfoel/strava/issues/11)
+
+
+### Features
+
+*  add webhooks support for strava client ([4aff198](https://github.com/rfoel/strava/commit/4aff19838370db891245fcea6f138c7e414b38fd))
+
 ## [1.1.4](https://github.com/rfoel/strava/compare/v1.1.3...v1.1.4) (2020-12-18)
 
 
