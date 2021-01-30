@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 import { StravaError } from './errors'
 import { RefreshTokenRequest, RefreshTokenResponse } from './types'
 
