@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/rfoel/strava/compare/v1.2.0...v1.2.1) (2021-02-01)
+
+
+### Bug Fixes
+
+* add fetch import back to request ([#23](https://github.com/rfoel/strava/issues/23)) ([83c67ed](https://github.com/rfoel/strava/commit/83c67ed3dd1cf49630de796bacbe15869d36a549))
+
 # [1.2.0](https://github.com/rfoel/strava/compare/v1.1.4...v1.2.0) (2021-01-25)
 
 
