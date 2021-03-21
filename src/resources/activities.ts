@@ -5,7 +5,7 @@ import {
   DetailedActivity,
   Lap,
   SummaryActivity,
-  SummaryAthlete,
+  SummaryAthlete
 } from '../models'
 import { Request } from '../request'
 
@@ -40,6 +40,13 @@ type GetKudoersByActivityIdRequest = {
 type GetLapsByActivityIdRequest = {
   id: number
 }
+
+type GetPhotosByActivityIdRequest = {
+  id: number
+  photo_sources?: boolean
+  size?: number
+}
+
 
 type GetZonesByActivityIdRequest = {
   id: number
@@ -121,6 +128,17 @@ export class Activities {
     return await this.request.makeApiRequest<Lap[]>(
       'get',
       `/activities/${id}/laps`,
+      { query },
+    )
+  }
+
+  async getPhotosByActivityId(
+    params: GetPhotosByActivityIdRequest,
+  ): Promise<Lap[]> {
+    const { id, ...query } = params
+    return await this.request.makeApiRequest<Lap[]>(
+      'get',
+      `/activities/${id}/photos`,
       { query },
     )
   }
