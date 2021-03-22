@@ -47,7 +47,6 @@ type GetPhotosByActivityIdRequest = {
   size?: number
 }
 
-
 type GetZonesByActivityIdRequest = {
   id: number
 }
