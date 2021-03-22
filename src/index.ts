@@ -9,9 +9,13 @@ import {
   SegmentEfforts,
   Segments,
   Streams,
+  Subscriptions,
   Uploads,
 } from './resources'
 import { RefreshTokenRequest } from './types'
+
+export * from './enums'
+export * from './models'
 
 export class Strava {
   private readonly request: Request
@@ -24,6 +28,7 @@ export class Strava {
   segmentEfforts: SegmentEfforts
   segments: Segments
   streams: Streams
+  subscriptions: Subscriptions
   uploads: Uploads
 
   constructor(config: RefreshTokenRequest) {
@@ -37,6 +42,7 @@ export class Strava {
     this.segmentEfforts = new SegmentEfforts(this.request)
     this.segments = new Segments(this.request)
     this.streams = new Streams(this.request)
+    this.subscriptions = new Subscriptions(this.request)
     this.uploads = new Uploads(this.request)
   }
 }
