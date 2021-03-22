@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/rfoel/strava/compare/v1.2.1...v1.3.0) (2021-03-22)
+
+
+### Features
+
+* **activities:** add support for retrieving activity photos ([#44](https://github.com/rfoel/strava/issues/44)) ([82fd922](https://github.com/rfoel/strava/commit/82fd922c5ab1eb00c52fc3b936522ff4c27b10c9))
+
 ## [1.2.1](https://github.com/rfoel/strava/compare/v1.2.0...v1.2.1) (2021-02-01)
 
 
