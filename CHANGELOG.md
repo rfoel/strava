@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/rfoel/strava/compare/v1.3.0...v1.3.1) (2021-04-09)
+
+
+### Bug Fixes
+
+* add missing fields from Strava API ([#58](https://github.com/rfoel/strava/issues/58)) ([8ba7ee0](https://github.com/rfoel/strava/commit/8ba7ee04c5a9681e581909618c8e161277bbf121))
+
 # [1.3.0](https://github.com/rfoel/strava/compare/v1.2.1...v1.3.0) (2021-03-22)
 
 
