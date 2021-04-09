@@ -43,14 +43,22 @@ export interface SummaryActivity {
   upload_id_str: string
   average_speed: number
   max_speed: number
+  average_cadence: number
+  average_temp: number
+  average_watts: number
+  weighted_average_watts: number
+  kilojoules: number
+  device_watts: boolean
   has_heartrate: boolean
   average_heartrate: number
   max_heartrate: number
   heartrate_opt_out: boolean
   display_hide_heartrate_option: boolean
+  max_watts: number
   elev_high: number
   elev_low: number
   pr_count: number
   total_photo_count: number
   has_kudoed: boolean
+  suffer_score: number
 }
