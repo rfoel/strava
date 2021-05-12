@@ -78,4 +78,10 @@ export interface DetailedActivity {
   embed_token: string
   similar_activities: SimilarActivity
   available_zones: ActivityZone[]
+  average_cadence: number
+  average_watts: number
+  device_watts: boolean
+  kilojoules: number
+  max_watts: number
+  suffer_score: number
 }
