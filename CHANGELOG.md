@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/rfoel/strava/compare/v1.3.1...v1.3.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* Add missing fields to detailedActivity model ([#66](https://github.com/rfoel/strava/issues/66)) ([88b23fa](https://github.com/rfoel/strava/commit/88b23fac4801b590db4afed026242e8d9f410440))
+
 ## [1.3.1](https://github.com/rfoel/strava/compare/v1.3.0...v1.3.1) (2021-04-09)
 
 
