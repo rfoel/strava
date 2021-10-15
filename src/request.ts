@@ -1,11 +1,11 @@
-import fetch from 'node-fetch'
+import 'isomorphic-fetch'
 
 import { StravaError } from './errors'
 import { RefreshTokenRequest, RefreshTokenResponse } from './types'
 
 type RequestParams = {
-  query?: any
-  body?: any
+  query?: Record<string, unknown>
+  body?: Record<string, unknown>
 }
 
 export class Request {
@@ -39,7 +39,7 @@ export class Request {
         throw response
       }
 
-      this.response = await response.json()
+      this.response = (await response.json()) as RefreshTokenResponse
     }
     return this.response
   }
@@ -51,8 +51,12 @@ export class Request {
   ): Promise<Response> {
     try {
       await this.getAccessToken()
-
-      const query: string = new URLSearchParams(params?.query).toString()
+      const query: string = new URLSearchParams(
+        Object.entries(params).reduce(
+          (acc, [key, value]) => ({ ...acc, [key]: String(value) }),
+          {},
+        ),
+      ).toString()
       const response = await fetch(
         `https://www.strava.com/api/v3${uri}?${query}`,
         {
@@ -70,10 +74,10 @@ export class Request {
       }
 
       if (response.status !== 204) {
-        return await response.json()
+        return (await response.json()) as Promise<Response>
       }
     } catch (error) {
-      const data = await error.json()
+      const data = (await error.json()) as Record<string, string>
       switch (error.status) {
         case 400:
         case 401:

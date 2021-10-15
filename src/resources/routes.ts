@@ -14,6 +14,7 @@ type GetRouteByIdRequest = {
 }
 
 type GetRoutesByAthleteIdRequest = {
+  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
@@ -22,7 +23,7 @@ type GetRoutesByAthleteIdRequest = {
 export class Routes {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 
