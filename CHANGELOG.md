@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/rfoel/strava/compare/v1.3.2...v1.3.3) (2021-10-15)
+
+
+### Bug Fixes
+
+* update deps ([31a6418](https://github.com/rfoel/strava/commit/31a64185993a66f9392a6c106c7d1fd74deea5e8))
+
 ## [1.3.2](https://github.com/rfoel/strava/compare/v1.3.1...v1.3.2) (2021-05-12)
 
 
