@@ -23,6 +23,7 @@ type GetSegmentByIdRequest = {
 }
 
 type StarSegmentRequest = {
+  [key: string]: string | number | boolean
   id: number
   starred: boolean
 }
@@ -30,7 +31,7 @@ type StarSegmentRequest = {
 export class Segments {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

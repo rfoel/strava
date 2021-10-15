@@ -12,7 +12,7 @@ type UpdateLoggedInAthleteRequest = {
 export class Athletes {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

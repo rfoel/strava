@@ -7,22 +7,26 @@ import {
 import { Request } from '../request'
 
 type GetClubActivitiesByIdRequest = {
+  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
 }
 
 type GetClubAdminsByIdRequest = {
+  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
 }
 
 type GetClubByIdRequest = {
+  [key: string]: string | number | boolean
   id: number
 }
 
 type GetClubMembersByIdRequest = {
+  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
@@ -36,7 +40,7 @@ type getLoggedInAthleteClubsRequest = {
 export class Clubs {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

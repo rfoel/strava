@@ -24,7 +24,7 @@ type GetSegmentStreamsRequest = {
 export class Streams {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

@@ -1,5 +1,3 @@
-import { Blob } from 'node-fetch'
-
 import { Upload } from '../models'
 import { Request } from '../request'
 
@@ -20,7 +18,7 @@ type GetUploadByIdRequest = {
 export class Uploads {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

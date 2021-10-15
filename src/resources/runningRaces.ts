@@ -12,7 +12,7 @@ type GetRunningRacesRequest = {
 export class RunningRaces {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

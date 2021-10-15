@@ -8,7 +8,7 @@ type getGearByIdRequest = {
 export class Gears {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

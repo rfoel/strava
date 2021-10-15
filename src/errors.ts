@@ -1,10 +1,10 @@
 export class StravaError {
-  errors: any
+  errors: unknown
   message: string
   status: number
   statusText: string
 
-  constructor(error: Response, data: any) {
+  constructor(error: Response, data: Record<string, string>) {
     this.errors = data.errors
     this.message = data.message
     this.status = error.status

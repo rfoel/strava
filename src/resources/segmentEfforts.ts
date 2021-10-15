@@ -15,7 +15,7 @@ type getSegmentEffortByIdRequest = {
 export class SegmentEfforts {
   private readonly request: Request
 
-  constructor(request) {
+  constructor(request: Request) {
     this.request = request
   }
 

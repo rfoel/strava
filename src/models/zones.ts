@@ -1,6 +1,6 @@
-import { HeartRateZoneRanges, PowerZoneRanges } from '.';
+import { HeartRateZoneRanges, PowerZoneRanges } from '.'
 
 export interface Zones {
-  heart_rate: HeartRateZoneRanges;
-  power: PowerZoneRanges;
+  heart_rate: HeartRateZoneRanges
+  power: PowerZoneRanges
 }
