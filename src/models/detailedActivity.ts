@@ -78,4 +78,5 @@ export interface DetailedActivity {
   embed_token: string
   similar_activities: SimilarActivity
   available_zones: ActivityZone[]
+  private_note: string
 }
