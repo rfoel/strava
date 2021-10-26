@@ -84,4 +84,5 @@ export interface DetailedActivity {
   kilojoules: number
   max_watts: number
   suffer_score: number
+  private_note: string
 }
