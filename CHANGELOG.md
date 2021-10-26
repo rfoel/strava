@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/rfoel/strava/compare/v1.3.3...v1.4.0) (2021-10-26)
+
+
+### Features
+
+* add private_note ([#105](https://github.com/rfoel/strava/issues/105)) ([4bf136e](https://github.com/rfoel/strava/commit/4bf136ebd1c3026f80776c2ac894b541d61581f5))
+
 ## [1.3.3](https://github.com/rfoel/strava/compare/v1.3.2...v1.3.3) (2021-10-15)
 
 
