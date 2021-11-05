@@ -32,18 +32,18 @@ export class Subscriptions {
     })
   }
 
-  async getSubscriptions(): Promise<Subscription[]> {
-    return this.request.makeApiRequest('get', '/push_subscriptions', {
-      query: {
+  async deleteSubscription(id: number): Promise<any> {
+    return this.request.makeApiRequest('delete', `/push_subscriptions/${id}`, {
+      body: {
         client_id: this.request.config.client_id,
         client_secret: this.request.config.client_secret,
       },
     })
   }
 
-  async deleteSubscription(id: number): Promise<any> {
-    return this.request.makeApiRequest('delete', `/push_subscriptions/${id}`, {
-      body: {
+  async getSubscriptions(): Promise<Subscription[]> {
+    return this.request.makeApiRequest('get', '/push_subscriptions', {
+      query: {
         client_id: this.request.config.client_id,
         client_secret: this.request.config.client_secret,
       },

@@ -6,7 +6,7 @@ type getStatsRequest = {
 }
 
 type UpdateLoggedInAthleteRequest = {
-  weight?: number
+  weight: number
 }
 
 export class Athletes {

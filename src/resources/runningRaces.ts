@@ -27,7 +27,7 @@ export class RunningRaces {
   }
 
   async getRunningRaces(
-    params: GetRunningRacesRequest,
+    params?: GetRunningRacesRequest,
   ): Promise<RunningRace[]> {
     return await this.request.makeApiRequest<RunningRace[]>(
       'get',

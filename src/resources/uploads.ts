@@ -1,14 +1,17 @@
+import FormData from 'form-data'
+import { ReadStream } from 'fs'
+
 import { Upload } from '../models'
 import { Request } from '../request'
 
-type createUploadRequest = {
-  file: Blob
-  name: string
-  description: string
-  trainer: string
-  commute: string
+type CreateUploadRequest = {
+  file: ReadStream
   data_type: 'fit' | 'fit.gz' | 'tcx' | 'tcx.gz' | 'gpx' | 'gpx.gz'
-  external_id: string
+  name?: string
+  description?: string
+  trainer?: string
+  commute?: string
+  external_id?: string
 }
 
 type GetUploadByIdRequest = {
@@ -22,9 +25,23 @@ export class Uploads {
     this.request = request
   }
 
-  async createUpload(params: createUploadRequest): Promise<Upload> {
-    return await this.request.makeApiRequest<Upload>('post', '/uploads', {
-      body: params,
+  async createUpload(params: CreateUploadRequest): Promise<Upload | void> {
+    const form = new FormData()
+    Object.entries(params).forEach(([key, value]) => {
+      form.append(key, value)
+    })
+    const headers = {
+      ...form.getHeaders(),
+      'content-length': 0,
+      host: 'www.strava.com',
+    }
+    form.getLength((error, length) => {
+      if (error) throw error
+      headers['content-length'] = length
+    })
+    return this.request.makeApiRequest<Upload>('post', '/uploads', {
+      body: form,
+      headers,
     })
   }
 

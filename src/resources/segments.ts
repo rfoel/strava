@@ -1,13 +1,10 @@
 import { DetailedSegment, ExplorerResponse, SummarySegment } from '../models'
 import { Request } from '../request'
 
-enum ActivityType {
-  Running = 'running',
-  Ridding = 'ridding',
-}
+type ActivityType = 'running' | 'ridding'
 
 type ExploreSegmentsRequest = {
-  bounds: number
+  bounds: string
   activity_type?: ActivityType
   min_cat?: number
   max_cat?: number
@@ -23,7 +20,6 @@ type GetSegmentByIdRequest = {
 }
 
 type StarSegmentRequest = {
-  [key: string]: string | number | boolean
   id: number
   starred: boolean
 }

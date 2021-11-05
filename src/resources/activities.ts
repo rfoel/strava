@@ -21,44 +21,37 @@ type CreateActivityRequest = {
 }
 
 type GetActivityByIdRequest = {
-  [key: string]: string | number | boolean
   id: number
   include_all_efforts?: boolean
 }
 
 type GetCommentsByActivityIdRequest = {
-  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
 }
 
 type GetKudoersByActivityIdRequest = {
-  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number
 }
 
 type GetLapsByActivityIdRequest = {
-  [key: string]: string | number | boolean
   id: number
 }
 
 type GetPhotosByActivityIdRequest = {
-  [key: string]: string | number | boolean
   id: number
   photo_sources?: boolean
   size?: number
 }
 
 type GetZonesByActivityIdRequest = {
-  [key: string]: string | number | boolean
   id: number
 }
 
 type GetLoggedInAthleteActivitiesRequest = {
-  [key: string]: string | number | boolean
   before?: number
   after?: number
   page?: number
@@ -66,12 +59,11 @@ type GetLoggedInAthleteActivitiesRequest = {
 }
 
 type UpdateActivityByIdRequest = {
-  [key: string]: string | number | boolean
   id: number
-  name: string
-  type: ActivityType
-  start_date_local: string
-  elapsed_time: number
+  name?: string
+  type?: ActivityType
+  start_date_local?: string
+  elapsed_time?: number
   description?: string
   distance?: number
   trainer?: number
@@ -174,11 +166,11 @@ export class Activities {
   async updateActivityById(
     params: UpdateActivityByIdRequest,
   ): Promise<DetailedActivity> {
-    const { id, ...query } = params
+    const { id, ...body } = params
     return await this.request.makeApiRequest<DetailedActivity>(
       'put',
       `/activities/${id}`,
-      { query },
+      { body },
     )
   }
 }

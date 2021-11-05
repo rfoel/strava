@@ -1,11 +1,11 @@
-import 'isomorphic-fetch'
+import fetch, { BodyInit } from 'node-fetch'
 
-import { StravaError } from './errors'
 import { RefreshTokenRequest, RefreshTokenResponse } from './types'
 
 type RequestParams = {
-  query?: Record<string, unknown>
-  body?: Record<string, unknown>
+  query?: Record<string, any>
+  body?: Record<string, any> | any
+  headers?: Record<string, any>
 }
 
 export class Request {
@@ -49,46 +49,47 @@ export class Request {
     uri: string,
     params?: RequestParams,
   ): Promise<Response> {
-    try {
-      await this.getAccessToken()
-      const query: string = new URLSearchParams(
-        Object.entries(params).reduce(
-          (acc, [key, value]) => ({ ...acc, [key]: String(value) }),
-          {},
-        ),
-      ).toString()
-      const response = await fetch(
-        `https://www.strava.com/api/v3${uri}?${query}`,
-        {
-          body: JSON.stringify(params?.body),
-          method,
-          headers: {
-            Authorization: `Bearer ${this.response.access_token}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      )
-
-      if (!response.ok) {
-        throw response
-      }
-
-      if (response.status !== 204) {
-        return (await response.json()) as Promise<Response>
-      }
-    } catch (error) {
-      const data = (await error.json()) as Record<string, string>
-      switch (error.status) {
-        case 400:
-        case 401:
-        case 403:
-        case 404:
-        case 429:
-        case 500:
-          throw new StravaError(error, data)
-        default:
-          throw error
-      }
+    await this.getAccessToken()
+    const query: string =
+      params?.query && Object.keys(params?.query).length
+        ? `?${new URLSearchParams(
+            Object.entries(params?.query).reduce(
+              (acc, [key, value]) => ({ ...acc, [key]: String(value) }),
+              {},
+            ),
+          ).toString()}`
+        : ''
+    const headers = {
+      Authorization: `Bearer ${this.response.access_token}`,
+      'content-type': 'application/json',
+      ...(params?.headers ? params.headers : {}),
     }
+
+    let body: BodyInit | undefined
+
+    if (params?.body) {
+      if (headers['content-type'] === 'application/json')
+        body = JSON.stringify(params.body)
+      else body = params.body
+    }
+
+    const response = await fetch(
+      `https://www.strava.com/api/v3${uri}${query}`,
+      {
+        body,
+        method,
+        headers,
+      },
+    )
+
+    if (!response.ok) {
+      throw response
+    }
+
+    if (response.status !== 204) {
+      return (await response.json()) as Response
+    }
+
+    return (response as unknown) as Response
   }
 }

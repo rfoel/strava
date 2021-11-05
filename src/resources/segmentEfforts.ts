@@ -8,7 +8,7 @@ type GetEffortsBySegmentIdRequest = {
   per_page?: number
 }
 
-type getSegmentEffortByIdRequest = {
+type GetSegmentEffortByIdRequest = {
   id: number
 }
 
@@ -30,7 +30,7 @@ export class SegmentEfforts {
   }
 
   async getSegmentEffortById(
-    params: getSegmentEffortByIdRequest,
+    params: GetSegmentEffortByIdRequest,
   ): Promise<DetailedSegmentEffort> {
     const { id } = params
     return await this.request.makeApiRequest<DetailedSegmentEffort>(
