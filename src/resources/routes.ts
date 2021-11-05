@@ -14,7 +14,6 @@ type GetRouteByIdRequest = {
 }
 
 type GetRoutesByAthleteIdRequest = {
-  [key: string]: string | number | boolean
   id: number
   page?: number
   per_page?: number

@@ -4,7 +4,7 @@ import { Request } from '../request'
 
 type GetActivityStreamsRequest = {
   id: number
-  keys: StreamKeys[]
+  keys: StreamKeys | StreamKeys[]
 }
 
 type GetRouteStreamsRequest = {
@@ -13,12 +13,12 @@ type GetRouteStreamsRequest = {
 
 type GetSegmentEffortStreamsRequest = {
   id: number
-  keys: StreamKeys[]
+  keys: StreamKeys | StreamKeys[]
 }
 
 type GetSegmentStreamsRequest = {
   id: number
-  keys: StreamKeys[]
+  keys: StreamKeys | StreamKeys[]
 }
 
 export class Streams {

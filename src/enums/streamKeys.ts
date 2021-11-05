@@ -1,13 +1,12 @@
-export enum StreamKeys {
-  Time = 'time',
-  Distance = 'distance',
-  LatLng = 'latlng',
-  Altitude = 'altitude',
-  VelocitySmooth = 'velocity_smooth',
-  Heartrate = 'heartrate',
-  Cadence = 'cadence',
-  Watts = 'watts',
-  Temp = 'temp',
-  Moving = 'moving',
-  GradeSmooth = 'grade_smooth',
-}
+export type StreamKeys =
+  | 'time'
+  | 'distance'
+  | 'latlng'
+  | 'altitude'
+  | 'velocity_smooth'
+  | 'heartrate'
+  | 'cadence'
+  | 'watts'
+  | 'temp'
+  | 'moving'
+  | 'grade_smooth'
