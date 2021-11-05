@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/rfoel/strava/compare/v1.4.0...v2.0.0) (2021-11-05)
+
+
+### Bug Fixes
+
+* fix query params ([f0a967b](https://github.com/rfoel/strava/commit/f0a967b5dc7df147ce0e76fd26d96dcc5f77f8a2)), closes [#112](https://github.com/rfoel/strava/issues/112)
+
+
+### BREAKING CHANGES
+
+* ActivityType and StreamKeys are now template literal types, meaning that
+whenever used before the user had to use the enum like [StreamKeys.LatLng]
+now it should be replaced with simply ['latlng'] with the benefits of autocompleting.
+
 # [1.4.0](https://github.com/rfoel/strava/compare/v1.3.3...v1.4.0) (2021-10-26)
 
 
