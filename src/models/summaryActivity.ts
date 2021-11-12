@@ -1,4 +1,5 @@
 import { ActivityType, ResourceState } from '../enums'
+import { LatLng } from '../types'
 
 import { MetaAthlete, PolylineMap } from '.'
 
@@ -19,8 +20,8 @@ export interface SummaryActivity {
   start_date_local: string
   timezone: string
   utc_offset: number
-  start_latlng: number[]
-  end_latlng: number[]
+  start_latlng: LatLng
+  end_latlng: LatLng
   location_city: string
   location_state: string
   location_country: string
