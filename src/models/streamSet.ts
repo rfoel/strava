@@ -1,9 +1,9 @@
-import { Stream } from '.'
+import { LatLngStream, Stream } from '.'
 
 export interface StreamSet {
   time: Stream
   distance: Stream
-  latlng: Stream
+  latlng: LatLngStream
   altitude: Stream
   velocity_smooth: Stream
   heartrate: Stream

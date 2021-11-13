@@ -1,4 +1,5 @@
 import { SummarySegmentEffort } from '.'
+import { LatLng } from '../types';
 
 enum ActivityType {
   Ride = 'Ride',
@@ -14,8 +15,8 @@ export interface SummarySegment {
   maximum_grade: number
   elevation_high: number
   elevation_low: number
-  start_latlng: number[]
-  end_latlng: number[]
+  start_latlng: LatLng
+  end_latlng: LatLng
   climb_category: number
   city: string
   state: string

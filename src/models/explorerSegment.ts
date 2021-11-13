@@ -1,3 +1,5 @@
+import { LatLng } from "../types";
+
 enum ClimbCategoryDesc {
   NC = 'NC',
   ONE = '1',
@@ -13,8 +15,8 @@ export interface ExplorerSegment {
   climb_category: number
   climb_category_desc: ClimbCategoryDesc
   avg_grade: number
-  start_latlng: number[]
-  end_latlng: number[]
+  start_latlng: LatLng
+  end_latlng: LatLng
   elev_difference: number
   distance: number
   points: string

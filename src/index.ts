@@ -14,6 +14,7 @@ import {
 } from './resources'
 import { RefreshTokenRequest } from './types'
 
+export * from './types'
 export * from './enums'
 export * from './models'
 

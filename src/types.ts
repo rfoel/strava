@@ -10,3 +10,8 @@ export interface RefreshTokenResponse {
   expires_in: number
   refresh_token: string
 }
+
+/**
+ * Latitude, Longitude
+ */
+export type LatLng = [number, number]
