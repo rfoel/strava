@@ -1,5 +1,5 @@
 import { SummarySegmentEffort } from '.'
-import { LatLng } from '../types';
+import { LatLng } from '../types'
 
 enum ActivityType {
   Ride = 'Ride',

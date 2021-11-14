@@ -1,4 +1,4 @@
-import { LatLng } from "../types";
+import { LatLng } from '../types'
 
 enum ClimbCategoryDesc {
   NC = 'NC',
