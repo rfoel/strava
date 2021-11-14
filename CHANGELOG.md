@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/rfoel/strava/compare/v2.0.0...v2.0.1) (2021-11-14)
+
+
+### Bug Fixes
+
+* add LatLng type for streams and start/end positions ([f48b946](https://github.com/rfoel/strava/commit/f48b946cf3f6f76bb0bb7ef872adabea44a155f6))
+
 # [2.0.0](https://github.com/rfoel/strava/compare/v1.4.0...v2.0.0) (2021-11-05)
 
 
