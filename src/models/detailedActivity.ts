@@ -1,4 +1,4 @@
-import { ActivityType, ResourceState } from '../enums'
+import { ActivityType, ResourceState,  SportType } from '../enums'
 import { LatLng } from '../types'
 
 import {
@@ -22,6 +22,7 @@ export interface DetailedActivity {
   elapsed_time: number
   total_elevation_gain: number
   type: ActivityType
+  sport_type: SportType
   workout_type: number
   id: number
   external_id: string

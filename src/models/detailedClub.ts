@@ -1,4 +1,4 @@
-import { Membership, ResourceState, SportType } from '../enums'
+import { ActivityType, Membership, ResourceState } from '../enums'
 
 export interface DetailedClub {
   id: number
@@ -7,7 +7,7 @@ export interface DetailedClub {
   profile_medium: string
   cover_photo: string
   cover_photo_small: string
-  sport_type: SportType
+  activity_types: ActivityType
   city: string
   state: string
   country: string
