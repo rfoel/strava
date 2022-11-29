@@ -13,10 +13,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-      - run: yarn install
-      - run: yarn test
-      - run: yarn lint
-      - run: yarn build
+      - run: npm run install
+      - run: npm run test
+      - run: npm run lint
+      - run: npm run build
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
