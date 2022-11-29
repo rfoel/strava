@@ -36,4 +36,3 @@ export type ActivityType =
   | 'Windsurf'
   | 'Workout'
   | 'Yoga'
-
