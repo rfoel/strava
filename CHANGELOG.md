@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/rfoel/strava/compare/v2.0.1...v2.0.2) (2022-11-29)
+
+
+### Bug Fixes
+
+* update activity and sport types ([94594e6](https://github.com/rfoel/strava/commit/94594e619819c7ce922ee4383ced48eca5987e11))
+
 ## [2.0.1](https://github.com/rfoel/strava/compare/v2.0.0...v2.0.1) (2021-11-14)
 
 
