@@ -26,19 +26,27 @@ export class Routes {
     this.request = request
   }
 
-  async getRouteAsGPX(params: GetRouteAsGPXRequest): Promise<any> {
+  async getRouteAsGPX(
+    params: GetRouteAsGPXRequest,
+    access_token?: string,
+  ): Promise<any> {
     const { id } = params
     return await this.request.makeApiRequest<any>(
       'get',
       `/routes/${id}/export_gpx`,
+      { access_token },
     )
   }
 
-  async getRouteAsTCX(params: GetRouteAsTCXRequest): Promise<any> {
+  async getRouteAsTCX(
+    params: GetRouteAsTCXRequest,
+    access_token?: string,
+  ): Promise<any> {
     const { id } = params
     return await this.request.makeApiRequest<any>(
       'get',
       `/routes/${id}/export_tcx`,
+      { access_token },
     )
   }
 

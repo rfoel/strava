@@ -12,8 +12,15 @@ export class Gears {
     this.request = request
   }
 
-  async getGearById(params: getGearByIdRequest): Promise<DetailedGear> {
+  async getGearById(
+    params: getGearByIdRequest,
+    access_token?: string,
+  ): Promise<DetailedGear> {
     const { id } = params
-    return await this.request.makeApiRequest<DetailedGear>('get', `/gear/${id}`)
+    return await this.request.makeApiRequest<DetailedGear>(
+      'get',
+      `/gear/${id}`,
+      { access_token },
+    )
   }
 }

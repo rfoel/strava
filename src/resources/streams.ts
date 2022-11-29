@@ -30,42 +30,49 @@ export class Streams {
 
   async getActivityStreams(
     params: GetActivityStreamsRequest,
+    access_token?: string,
   ): Promise<StreamSet> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<StreamSet>(
       'get',
       `/activities/${id}/streams`,
-      { query: { ...query, key_by_type: true } },
+      { query: { ...query, key_by_type: true }, access_token },
     )
   }
 
-  async getRouteStreams(params: GetRouteStreamsRequest): Promise<StreamSet> {
+  async getRouteStreams(
+    params: GetRouteStreamsRequest,
+    access_token?: string,
+  ): Promise<StreamSet> {
     const { id } = params
     return await this.request.makeApiRequest<StreamSet>(
       'get',
       `/routes/${id}/streams`,
+      { access_token },
     )
   }
 
   async getSegmentEffortStreams(
     params: GetSegmentEffortStreamsRequest,
+    access_token?: string,
   ): Promise<StreamSet> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<StreamSet>(
       'get',
       `/segment_efforts/${id}/streams`,
-      { query: { ...query, key_by_type: true } },
+      { query: { ...query, key_by_type: true }, access_token },
     )
   }
 
   async getSegmentStreams(
     params: GetSegmentStreamsRequest,
+    access_token?: string,
   ): Promise<StreamSet> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<StreamSet>(
       'get',
       `/segments/${id}/streams`,
-      { query: { ...query, key_by_type: true } },
+      { query: { ...query, key_by_type: true }, access_token },
     )
   }
 }

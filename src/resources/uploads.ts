@@ -45,11 +45,15 @@ export class Uploads {
     })
   }
 
-  async getUploadById(params: GetUploadByIdRequest): Promise<Upload> {
+  async getUploadById(
+    params: GetUploadByIdRequest,
+    access_token?: string,
+  ): Promise<Upload> {
     const { uploadId } = params
     return await this.request.makeApiRequest<Upload>(
       'get',
       `/uploads/${uploadId}`,
+      { access_token },
     )
   }
 }

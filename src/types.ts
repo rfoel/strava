@@ -3,7 +3,6 @@ export interface RefreshTokenRequest {
   client_secret: string
   refresh_token: string
 }
-
 export interface RefreshTokenResponse {
   access_token: string
   expires_at: number

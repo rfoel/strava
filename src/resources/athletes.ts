@@ -16,29 +16,40 @@ export class Athletes {
     this.request = request
   }
 
-  async getLoggedInAthlete(): Promise<DetailedAthlete> {
-    return await this.request.makeApiRequest<DetailedAthlete>('get', '/athlete')
+  async getLoggedInAthlete(access_token?: string): Promise<DetailedAthlete> {
+    return await this.request.makeApiRequest<DetailedAthlete>(
+      'get',
+      '/athlete',
+      { access_token },
+    )
   }
 
-  async getLoggedInAthleteZones(): Promise<Zones> {
-    return await this.request.makeApiRequest<Zones>('get', '/athlete/zones')
+  async getLoggedInAthleteZones(access_token?: string): Promise<Zones> {
+    return await this.request.makeApiRequest<Zones>('get', '/athlete/zones', {
+      access_token,
+    })
   }
 
-  async getStats(params: getStatsRequest): Promise<ActivityStats> {
+  async getStats(
+    params: getStatsRequest,
+    access_token?: string,
+  ): Promise<ActivityStats> {
     const { id } = params
     return await this.request.makeApiRequest<ActivityStats>(
       'get',
-      `/athletes/${id}/stats`,
+      `/athletes/${id}/s  tats`,
+      { access_token },
     )
   }
 
   async updateLoggedInAthlete(
     params: UpdateLoggedInAthleteRequest,
+    access_token?: string,
   ): Promise<DetailedAthlete> {
     return await this.request.makeApiRequest<DetailedAthlete>(
       'put',
       `/athlete`,
-      { body: params },
+      { body: params, access_token },
     )
   }
 }

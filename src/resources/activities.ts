@@ -79,44 +79,48 @@ export class Activities {
 
   async createActivity(
     params: CreateActivityRequest,
+    access_token?: string,
   ): Promise<DetailedActivity> {
     return await this.request.makeApiRequest<DetailedActivity>(
       'post',
       '/activities',
-      { body: params },
+      { body: params, access_token },
     )
   }
 
   async getActivityById(
     params: GetActivityByIdRequest,
+    access_token?: string,
   ): Promise<DetailedActivity> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<DetailedActivity>(
       'get',
       `/activities/${id}`,
-      { query },
+      { query, access_token },
     )
   }
 
   async getCommentsByActivityId(
     params: GetCommentsByActivityIdRequest,
+    access_token?: string,
   ): Promise<Comment[]> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<Comment[]>(
       'get',
       `/activities/${id}/comments`,
-      { query },
+      { query, access_token },
     )
   }
 
   async getKudoersByActivityId(
     params: GetKudoersByActivityIdRequest,
+    access_token?: string,
   ): Promise<SummaryAthlete[]> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<SummaryAthlete[]>(
       'get',
       `/activities/${id}/kudos`,
-      { query },
+      { query, access_token },
     )
   }
 
@@ -133,12 +137,13 @@ export class Activities {
 
   async getPhotosByActivityId(
     params: GetPhotosByActivityIdRequest,
+    access_token?: string,
   ): Promise<Lap[]> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<Lap[]>(
       'get',
       `/activities/${id}/photos`,
-      { query },
+      { query, access_token },
     )
   }
 
@@ -154,23 +159,25 @@ export class Activities {
 
   async getZonesByActivityId(
     params: GetZonesByActivityIdRequest,
+    access_token?: string,
   ): Promise<ActivityZone[]> {
     const { id, ...query } = params
     return await this.request.makeApiRequest<ActivityZone[]>(
       'get',
       `/activities/${id}/zones`,
-      { query },
+      { query, access_token },
     )
   }
 
   async updateActivityById(
     params: UpdateActivityByIdRequest,
+    access_token?: string,
   ): Promise<DetailedActivity> {
     const { id, ...body } = params
     return await this.request.makeApiRequest<DetailedActivity>(
       'put',
       `/activities/${id}`,
-      { body },
+      { body, access_token },
     )
   }
 }
