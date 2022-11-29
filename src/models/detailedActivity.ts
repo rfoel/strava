@@ -1,4 +1,4 @@
-import { ActivityType, ResourceState,  SportType } from '../enums'
+import { ActivityType, ResourceState, SportType } from '../enums'
 import { LatLng } from '../types'
 
 import {
