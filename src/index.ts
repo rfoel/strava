@@ -12,6 +12,7 @@ import {
   Subscriptions,
   Uploads,
 } from './resources'
+import { Oauth } from './resources/oauth'
 import { RefreshTokenRequest } from './types'
 
 export * from './types'
@@ -24,6 +25,7 @@ export class Strava {
   athletes: Athletes
   clubs: Clubs
   gears: Gears
+  oauth: Oauth
   routes: Routes
   runningRaces: RunningRaces
   segmentEfforts: SegmentEfforts
@@ -38,6 +40,7 @@ export class Strava {
     this.athletes = new Athletes(this.request)
     this.clubs = new Clubs(this.request)
     this.gears = new Gears(this.request)
+    this.oauth = new Oauth()
     this.routes = new Routes(this.request)
     this.runningRaces = new RunningRaces(this.request)
     this.segmentEfforts = new SegmentEfforts(this.request)

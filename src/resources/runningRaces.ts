@@ -18,21 +18,24 @@ export class RunningRaces {
 
   async getRunningRaceById(
     params: GetRunningRaceByIdRequest,
+    access_token?: string,
   ): Promise<RunningRace> {
     const { id } = params
     return await this.request.makeApiRequest<RunningRace>(
       'get',
       `/running_races/${id}`,
+      { access_token },
     )
   }
 
   async getRunningRaces(
     params?: GetRunningRacesRequest,
+    access_token?: string,
   ): Promise<RunningRace[]> {
     return await this.request.makeApiRequest<RunningRace[]>(
       'get',
       '/running_races',
-      { query: params },
+      { query: params, access_token },
     )
   }
 }

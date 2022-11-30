@@ -6,6 +6,7 @@ type RequestParams = {
   query?: Record<string, any>
   body?: Record<string, any> | any
   headers?: Record<string, any>
+  access_token?: string
 }
 
 export class Request {
@@ -49,7 +50,7 @@ export class Request {
     uri: string,
     params?: RequestParams,
   ): Promise<Response> {
-    await this.getAccessToken()
+    if (!params?.access_token) await this.getAccessToken()
     const query: string =
       params?.query && Object.keys(params?.query).length
         ? `?${new URLSearchParams(
@@ -60,7 +61,11 @@ export class Request {
           ).toString()}`
         : ''
     const headers = {
-      Authorization: `Bearer ${this.response.access_token}`,
+      Authorization: `Bearer ${
+        params?.access_token
+          ? params?.access_token
+          : this.response.access_token
+      }`,
       'content-type': 'application/json',
       ...(params?.headers ? params.headers : {}),
     }

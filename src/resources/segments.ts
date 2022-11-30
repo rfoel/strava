@@ -33,11 +33,12 @@ export class Segments {
 
   async exploreSegments(
     params: ExploreSegmentsRequest,
+    access_token?: string,
   ): Promise<ExplorerResponse> {
     return await this.request.makeApiRequest<ExplorerResponse>(
       'get',
       '/segments/explore',
-      { query: params },
+      { query: params, access_token },
     )
   }
 
@@ -53,20 +54,25 @@ export class Segments {
 
   async getSegmentById(
     params: GetSegmentByIdRequest,
+    access_token?: string,
   ): Promise<DetailedSegment> {
     const { id } = params
     return await this.request.makeApiRequest<DetailedSegment>(
       'get',
       `/segments/${id}`,
+      { access_token },
     )
   }
 
-  async starSegment(params: StarSegmentRequest): Promise<DetailedSegment> {
+  async starSegment(
+    params: StarSegmentRequest,
+    access_token?: string,
+  ): Promise<DetailedSegment> {
     const { id, ...body } = params
     return await this.request.makeApiRequest<DetailedSegment>(
       'put',
       `/segments/${id}/starred`,
-      { body },
+      { body, access_token },
     )
   }
 }
