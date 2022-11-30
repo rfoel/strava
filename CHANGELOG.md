@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/rfoel/strava/compare/v2.0.2...v2.1.0) (2022-11-30)
+
+
+### Features
+
+* Allow access request in params  ([#179](https://github.com/rfoel/strava/issues/179)) ([1acea80](https://github.com/rfoel/strava/commit/1acea80c889fbff915cce9369919b112fbbdd2de))
+
 ## [2.0.2](https://github.com/rfoel/strava/compare/v2.0.1...v2.0.2) (2022-11-29)
 
 
