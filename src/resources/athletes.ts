@@ -37,7 +37,7 @@ export class Athletes {
     const { id } = params
     return await this.request.makeApiRequest<ActivityStats>(
       'get',
-      `/athletes/${id}/s  tats`,
+      `/athletes/${id}/stats`,
       { access_token },
     )
   }
