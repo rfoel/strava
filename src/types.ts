@@ -2,6 +2,7 @@ export interface RefreshTokenRequest {
   client_id: string
   client_secret: string
   refresh_token: string
+  on_token_refresh?: (token: RefreshTokenResponse) => void
 }
 export interface RefreshTokenResponse {
   access_token: string
