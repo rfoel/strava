@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/rfoel/strava/compare/v2.1.0...v2.2.0) (2023-04-24)
+
+
+### Features
+
+* allow callback for refresh ([#190](https://github.com/rfoel/strava/issues/190)) ([5e591e7](https://github.com/rfoel/strava/commit/5e591e7bfcb3bd62f425a2797c64ad80876d18da))
+
 # [2.1.0](https://github.com/rfoel/strava/compare/v2.0.2...v2.1.0) (2022-11-30)
 
 
