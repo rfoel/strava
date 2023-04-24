@@ -41,6 +41,7 @@ export class Request {
       }
 
       this.response = (await response.json()) as RefreshTokenResponse
+      this.config.on_token_refresh?.(this.response)
     }
     return this.response
   }

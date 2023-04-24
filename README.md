@@ -46,6 +46,22 @@ const strava = new Strava({
 })()
 ```
 
+### Refreshing the access token
+
+This library will automatically refresh the access token when needed. You may need to store the refresh token somewhere, so you can use it `on_token_refresh` callback.
+```javascript
+import { Strava } from 'strava'
+
+const strava = new Strava({
+  client_id: '123',
+  client_secret: 'abc',
+  refresh_token: 'def',
+  on_token_refresh: (response: RefreshTokenResponse) => {
+    db.set('refresh_token', response.refresh_token)
+  }
+})
+```
+
 ## Contributing
 
 Issues and pull requests are welcome.
