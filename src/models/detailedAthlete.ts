@@ -25,7 +25,7 @@ export interface DetailedAthlete {
   email: string
   ftp: number
   weight: number
-  clubs: SummaryClub
-  bikes: SummaryGear
-  shoes: SummaryGear
+  clubs: SummaryClub[]
+  bikes: SummaryGear[]
+  shoes: SummaryGear[]
 }
