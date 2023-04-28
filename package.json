@@ -1,6 +1,6 @@
 {
   "name": "strava",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "This library is a fully typed JavaScript wrapper of the Strava JSON API",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

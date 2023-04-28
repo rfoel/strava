@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/rfoel/strava/compare/v2.2.0...v2.2.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* fix types. ([#191](https://github.com/rfoel/strava/issues/191)) ([9465f02](https://github.com/rfoel/strava/commit/9465f022ba7a5100f71993d6f47fc394236a6c1f))
+
 # [2.2.0](https://github.com/rfoel/strava/compare/v2.1.0...v2.2.0) (2023-04-24)
 
 
