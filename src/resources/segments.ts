@@ -1,25 +1,25 @@
 import { DetailedSegment, ExplorerResponse, SummarySegment } from '../models'
 import { Request } from '../request'
 
-type ActivityType = 'running' | 'ridding'
+export type ActivityType = 'running' | 'ridding'
 
-type ExploreSegmentsRequest = {
+export type ExploreSegmentsRequest = {
   bounds: string
   activity_type?: ActivityType
   min_cat?: number
   max_cat?: number
 }
 
-type GetLoggedInAthleteStarredSegmentsRequest = {
+export type GetLoggedInAthleteStarredSegmentsRequest = {
   page?: number
   per_page?: number
 }
 
-type GetSegmentByIdRequest = {
+export type GetSegmentByIdRequest = {
   id: number
 }
 
-type StarSegmentRequest = {
+export type StarSegmentRequest = {
   id: number
   starred: boolean
 }

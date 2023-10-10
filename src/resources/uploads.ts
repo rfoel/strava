@@ -4,7 +4,7 @@ import { ReadStream } from 'fs'
 import { Upload } from '../models'
 import { Request } from '../request'
 
-type CreateUploadRequest = {
+export type CreateUploadRequest = {
   file: ReadStream
   data_type: 'fit' | 'fit.gz' | 'tcx' | 'tcx.gz' | 'gpx' | 'gpx.gz'
   name?: string
@@ -14,7 +14,7 @@ type CreateUploadRequest = {
   external_id?: string
 }
 
-type GetUploadByIdRequest = {
+export type GetUploadByIdRequest = {
   uploadId: number
 }
 

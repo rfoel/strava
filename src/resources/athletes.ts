@@ -1,11 +1,11 @@
 import { ActivityStats, DetailedAthlete, Zones } from '../models'
 import { Request } from '../request'
 
-type getStatsRequest = {
+export type GetStatsRequest = {
   id: number
 }
 
-type UpdateLoggedInAthleteRequest = {
+export type UpdateLoggedInAthleteRequest = {
   weight: number
 }
 
@@ -31,7 +31,7 @@ export class Athletes {
   }
 
   async getStats(
-    params: getStatsRequest,
+    params: GetStatsRequest,
     access_token?: string,
   ): Promise<ActivityStats> {
     const { id } = params

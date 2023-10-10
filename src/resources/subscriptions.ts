@@ -1,15 +1,15 @@
 import { Request } from '../request'
 
-type Subscription = {
+export type Subscription = {
   id: number
 }
 
-type SubscriptionCreationRequest = {
+export type SubscriptionCreationRequest = {
   callback_url: string
   verify_token: string
 }
 
-type SubscriptionCreationResponse = {
+export type SubscriptionCreationResponse = {
   id: number
 }
 

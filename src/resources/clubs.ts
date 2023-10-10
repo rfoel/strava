@@ -6,29 +6,29 @@ import {
 } from '../models'
 import { Request } from '../request'
 
-type GetClubActivitiesByIdRequest = {
+export type GetClubActivitiesByIdRequest = {
   id: number
   page?: number
   per_page?: number
 }
 
-type GetClubAdminsByIdRequest = {
+export type GetClubAdminsByIdRequest = {
   id: number
   page?: number
   per_page?: number
 }
 
-type GetClubByIdRequest = {
+export type GetClubByIdRequest = {
   id: number
 }
 
-type GetClubMembersByIdRequest = {
+export type GetClubMembersByIdRequest = {
   id: number
   page?: number
   per_page?: number
 }
 
-type getLoggedInAthleteClubsRequest = {
+export type GetLoggedInAthleteClubsRequest = {
   page?: number
   per_page?: number
 }
@@ -85,7 +85,7 @@ export class Clubs {
   }
 
   async getLoggedInAthleteClubs(
-    params?: getLoggedInAthleteClubsRequest,
+    params?: GetLoggedInAthleteClubsRequest,
     access_token?: string,
   ): Promise<SummaryClub[]> {
     return await this.request.makeApiRequest<SummaryClub[]>(

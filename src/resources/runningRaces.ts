@@ -1,11 +1,11 @@
 import { RunningRace } from '../models'
 import { Request } from '../request'
 
-type GetRunningRaceByIdRequest = {
+export type GetRunningRaceByIdRequest = {
   id: number
 }
 
-type GetRunningRacesRequest = {
+export type GetRunningRacesRequest = {
   year?: number
 }
 
