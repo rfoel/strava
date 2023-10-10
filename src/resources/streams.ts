@@ -2,21 +2,21 @@ import { StreamKeys } from '../enums'
 import { StreamSet } from '../models'
 import { Request } from '../request'
 
-type GetActivityStreamsRequest = {
+export type GetActivityStreamsRequest = {
   id: number
   keys: StreamKeys | StreamKeys[]
 }
 
-type GetRouteStreamsRequest = {
+export type GetRouteStreamsRequest = {
   id: number
 }
 
-type GetSegmentEffortStreamsRequest = {
+export type GetSegmentEffortStreamsRequest = {
   id: number
   keys: StreamKeys | StreamKeys[]
 }
 
-type GetSegmentStreamsRequest = {
+export type GetSegmentStreamsRequest = {
   id: number
   keys: StreamKeys | StreamKeys[]
 }

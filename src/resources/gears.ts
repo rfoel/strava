@@ -1,7 +1,7 @@
 import { DetailedGear } from '../models'
 import { Request } from '../request'
 
-type getGearByIdRequest = {
+export type GetGearByIdRequest = {
   id: number
 }
 
@@ -13,7 +13,7 @@ export class Gears {
   }
 
   async getGearById(
-    params: getGearByIdRequest,
+    params: GetGearByIdRequest,
     access_token?: string,
   ): Promise<DetailedGear> {
     const { id } = params

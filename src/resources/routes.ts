@@ -1,19 +1,19 @@
 import { Route } from '../models'
 import { Request } from '../request'
 
-type GetRouteAsGPXRequest = {
+export type GetRouteAsGPXRequest = {
   id: number
 }
 
-type GetRouteAsTCXRequest = {
+export type GetRouteAsTCXRequest = {
   id: number
 }
 
-type GetRouteByIdRequest = {
+export type GetRouteByIdRequest = {
   id: number
 }
 
-type GetRoutesByAthleteIdRequest = {
+export type GetRoutesByAthleteIdRequest = {
   id: number
   page?: number
   per_page?: number

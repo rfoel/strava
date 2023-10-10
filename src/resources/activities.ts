@@ -9,7 +9,7 @@ import {
 } from '../models'
 import { Request } from '../request'
 
-type CreateActivityRequest = {
+export type CreateActivityRequest = {
   name: string
   type: ActivityType
   start_date_local: string
@@ -20,45 +20,45 @@ type CreateActivityRequest = {
   commute?: number
 }
 
-type GetActivityByIdRequest = {
+export type GetActivityByIdRequest = {
   id: number
   include_all_efforts?: boolean
 }
 
-type GetCommentsByActivityIdRequest = {
+export type GetCommentsByActivityIdRequest = {
   id: number
   page?: number
   per_page?: number
 }
 
-type GetKudoersByActivityIdRequest = {
+export type GetKudoersByActivityIdRequest = {
   id: number
   page?: number
   per_page?: number
 }
 
-type GetLapsByActivityIdRequest = {
+export type GetLapsByActivityIdRequest = {
   id: number
 }
 
-type GetPhotosByActivityIdRequest = {
+export type GetPhotosByActivityIdRequest = {
   id: number
   photo_sources?: boolean
   size?: number
 }
 
-type GetZonesByActivityIdRequest = {
+export type GetZonesByActivityIdRequest = {
   id: number
 }
 
-type GetLoggedInAthleteActivitiesRequest = {
+export type GetLoggedInAthleteActivitiesRequest = {
   before?: number
   after?: number
   page?: number
   per_page?: number
 }
 
-type UpdateActivityByIdRequest = {
+export type UpdateActivityByIdRequest = {
   id: number
   name?: string
   type?: ActivityType

@@ -1,14 +1,14 @@
 import { DetailedSegmentEffort } from '../models'
 import { Request } from '../request'
 
-type GetEffortsBySegmentIdRequest = {
+export type GetEffortsBySegmentIdRequest = {
   segment_id: number
   start_date_local?: string
   end_date_local?: string
   per_page?: number
 }
 
-type GetSegmentEffortByIdRequest = {
+export type GetSegmentEffortByIdRequest = {
   id: number
 }
 
