@@ -63,9 +63,7 @@ export class Request {
         : ''
     const headers = {
       Authorization: `Bearer ${
-        params?.access_token
-          ? params?.access_token
-          : this.response.access_token
+        params?.access_token ? params?.access_token : this.response.access_token
       }`,
       'content-type': 'application/json',
       ...(params?.headers ? params.headers : {}),
