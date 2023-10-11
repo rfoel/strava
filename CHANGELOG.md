@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/rfoel/strava/compare/v2.2.1...v2.2.2) (2023-10-11)
+
+
+### Bug Fixes
+
+* Export all Request object types from resources/*.ts. ([#193](https://github.com/rfoel/strava/issues/193)) ([ac6d92e](https://github.com/rfoel/strava/commit/ac6d92ea8489540d5931cf4fa1e50749fff96fa2))
+
 ## [2.2.1](https://github.com/rfoel/strava/compare/v2.2.0...v2.2.1) (2023-04-28)
 
 
