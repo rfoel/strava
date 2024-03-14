@@ -1,3 +1,5 @@
+import { SummaryAthlete } from './models'
+
 export interface AppConfig {
   client_id: string
   client_secret: string
@@ -16,6 +18,8 @@ export interface AccessToken {
 
 export interface RefreshTokenResponse extends AccessToken {
   expires_in: number
+  /** The athlete is only provided on the initial request */
+  athlete?: SummaryAthlete
 }
 
 /**
