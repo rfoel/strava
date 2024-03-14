@@ -13,7 +13,7 @@ import {
   Uploads,
 } from './resources'
 import { Oauth } from './resources/oauth'
-import { RefreshTokenRequest } from './types'
+import { AccessToken, RefreshTokenRequest } from './types'
 
 export * from './types'
 export * from './enums'
@@ -34,13 +34,13 @@ export class Strava {
   subscriptions: Subscriptions
   uploads: Uploads
 
-  constructor(config: RefreshTokenRequest) {
-    this.request = new Request(config)
+  constructor(config: RefreshTokenRequest, access_token?: AccessToken) {
+    this.request = new Request(config, access_token)
     this.activities = new Activities(this.request)
     this.athletes = new Athletes(this.request)
     this.clubs = new Clubs(this.request)
     this.gears = new Gears(this.request)
-    this.oauth = new Oauth()
+    this.oauth = this.request.oauth
     this.routes = new Routes(this.request)
     this.runningRaces = new RunningRaces(this.request)
     this.segmentEfforts = new SegmentEfforts(this.request)
