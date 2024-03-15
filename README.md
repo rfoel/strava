@@ -23,9 +23,8 @@ yarn add strava
 
 ## Usage
 
-The way the library is implemented the user must have gone through the [Strava OAuth flow](https://developers.strava.com/docs/authentication/) beforehand and got a refresh token. This way we can ensure that whenever needed we get a new access token.
-
-This may not be the best way to work with the API and I'm open to suggestions to make it better.
+The library can be initialized with a refresh token and optionally an access token.
+If these are not available, see below (**Token exchange**).
 
 ```javascript
 import { Strava } from 'strava'
@@ -36,30 +35,103 @@ const strava = new Strava({
   refresh_token: 'def',
 })
 
-;(async () => {
-  try {
-    const activities = await strava.activities.getLoggedInAthleteActivities()
-    console.log(activities)
-  } catch (error) {
-    console.log(error)
-  }
-})()
+try {
+  const activities = await strava.activities.getLoggedInAthleteActivities()
+  console.log(activities)
+} catch (error) {
+  console.log(error)
+}
 ```
 
 ### Refreshing the access token
 
-This library will automatically refresh the access token when needed. You may need to store the refresh token somewhere, so you can use it `on_token_refresh` callback.
+This library will automatically refresh the access token when needed.
+In order to store the token, you can use the `on_token_refresh` callback.
+This received an `AccessToken` object (consisting of `access_token`, `expires_at`, and `refresh_token`).
+Note that the refresh token as returned by this call can sometimes change,
+at which point the old token becomes invalid.
+
+An `AccessToken` object can also be passed as a second argument to the Strava constructor.
+This can save an initial token refresh.
+As `AccessToken` contains a refresh token,
+the first argument does not need to contain a refresh token.
+
 ```javascript
 import { Strava } from 'strava'
 
-const strava = new Strava({
-  client_id: '123',
-  client_secret: 'abc',
-  refresh_token: 'def',
-  on_token_refresh: (response: RefreshTokenResponse) => {
-    db.set('refresh_token', response.refresh_token)
-  }
-})
+const strava = new Strava(
+  {
+    client_id: '123',
+    client_secret: 'abc',
+
+    on_token_refresh: response => {
+      cache.accessToken = response
+    },
+  },
+  cache.accessToken,
+)
+```
+
+### Token exchange
+
+When a user logs in for the first time, you will need to perform authorization with OAuth.
+This involves sending the user to <https://www.strava.com/oauth/authorize>,
+and receiving the auth code as a query parameter.
+
+This can be used as follows:
+
+```javascript
+import { Strava } from 'strava'
+
+try {
+  const strava = await Strava.createFromTokenExchange(
+    {
+      client_id: '123',
+      client_secret: 'abc',
+    },
+    token,
+  )
+
+  const activities = await strava.activities.getLoggedInAthleteActivities()
+  console.log(activities)
+} catch (error) {
+  console.log(error)
+}
+```
+
+### Getting athlete info
+
+When a user logs in for the first time, the Strava API returns information about the newly logged-in user.
+This can be read using the on_token_refresh callback.
+Note that this will only ever be provided on the initial token exchange,
+before the promise returned from `Strava.createFromTokenExchange` returns.
+When the `on_token_refresh` callback is called again after the token expires,
+`response.athlete` will always be undefined.
+
+```javascript
+import { Strava } from 'strava'
+
+try {
+  const strava = await Strava.createFromTokenExchange(
+    {
+      client_id: '123',
+      client_secret: 'abc',
+      on_token_refresh: response => {
+        if (response.athlete) {
+          console.log(response.athlete)
+        }
+
+        db.set('refresh_token', response.refresh_token)
+      },
+    },
+    token,
+  )
+
+  const activities = await strava.activities.getLoggedInAthleteActivities()
+  console.log(activities)
+} catch (error) {
+  console.log(error)
+}
 ```
 
 ## Contributing
@@ -68,4 +140,4 @@ Issues and pull requests are welcome.
 
 ## License
 
-[MIT](https://github.com/rfoell/strava/blob/master/LICENSE)
+[MIT](https://github.com/rfoel/strava/blob/master/LICENSE)
