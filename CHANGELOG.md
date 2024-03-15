@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/rfoel/strava/compare/v2.2.2...v2.3.0) (2024-03-15)
+
+
+### Features
+
+* Allow initialization with access token or token exchange code ([#194](https://github.com/rfoel/strava/issues/194)) ([bc48f8d](https://github.com/rfoel/strava/commit/bc48f8d0ade76ec5f37a28b1dfc279ab7fa7372e))
+
 ## [2.2.2](https://github.com/rfoel/strava/compare/v2.2.1...v2.2.2) (2023-10-11)
 
 
