@@ -140,4 +140,4 @@ Issues and pull requests are welcome.
 
 ## License
 
-[MIT](https://github.com/rfoell/strava/blob/master/LICENSE)
+[MIT](https://github.com/rfoel/strava/blob/master/LICENSE)
