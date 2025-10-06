@@ -19,7 +19,7 @@ function buildQueryString(params: Record<string, any>): string {
     if (value === undefined || value === null) continue
 
     if (Array.isArray(value)) {
-      value.forEach(item => searchParams.append(key, String(item)))
+      value.forEach((item) => searchParams.append(key, String(item)))
     } else {
       searchParams.append(key, String(value))
     }
@@ -40,8 +40,8 @@ export class StravaApiError extends Error {
 }
 
 export class Request {
-  private static readonly TOKEN_EXPIRY_BUFFER_SECONDS = 300 // 5 minutes
-  readonly oauth = new Oauth()
+  private static readonly TOKEN_EXPIRY_BUFFER_SECONDS: number = 300 // 5 minutes
+  readonly oauth: Oauth = new Oauth()
 
   constructor(
     readonly config: RefreshTokenRequest,

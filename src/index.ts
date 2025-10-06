@@ -53,7 +53,10 @@ export class Strava {
     this.uploads = new Uploads(this.request)
   }
 
-  static async createFromTokenExchange(config: AppConfig, code: string) {
+  static async createFromTokenExchange(
+    config: AppConfig,
+    code: string,
+  ): Promise<Strava> {
     const tokenExchangeResponse = await Oauth.tokenExchange(config, code)
     config.on_token_refresh?.(tokenExchangeResponse)
     return new Strava(config, tokenExchangeResponse)

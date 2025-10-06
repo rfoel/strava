@@ -17,7 +17,10 @@ export class Oauth {
     )
   }
 
-  static async tokenExchange(config: AppConfig, code: string) {
+  static async tokenExchange(
+    config: AppConfig,
+    code: string,
+  ): Promise<RefreshTokenResponse> {
     if (!code) {
       throw new Error('No code provided')
     }
@@ -31,7 +34,9 @@ export class Oauth {
     )
   }
 
-  private static async oauthRequest(body: URLSearchParams) {
+  private static async oauthRequest(
+    body: URLSearchParams,
+  ): Promise<RefreshTokenResponse> {
     const response = await fetch(`https://www.strava.com/oauth/token`, {
       body,
       method: 'post',

@@ -64,7 +64,7 @@ const strava = new Strava(
     client_id: '123',
     client_secret: 'abc',
 
-    on_token_refresh: response => {
+    on_token_refresh: (response) => {
       cache.accessToken = response
     },
   },
@@ -116,7 +116,7 @@ try {
     {
       client_id: '123',
       client_secret: 'abc',
-      on_token_refresh: response => {
+      on_token_refresh: (response) => {
         if (response.athlete) {
           console.log(response.athlete)
         }
