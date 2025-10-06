@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/rfoel/strava/compare/v3.0.0...v3.1.0) (2025-10-06)
+
+
+### Features
+
+* expose rate limit from Strava API ([2661041](https://github.com/rfoel/strava/commit/26610414ab844e3c4722cf5d927fe2cc3f7e4e0a))
+
 # [3.0.0](https://github.com/rfoel/strava/compare/v2.3.0...v3.0.0) (2025-10-06)
 
 
