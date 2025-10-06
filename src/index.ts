@@ -1,4 +1,4 @@
-import { Request } from './request'
+import { Request, StravaApiError } from './request'
 import {
   Activities,
   Athletes,
@@ -18,6 +18,7 @@ import { AccessToken, AppConfig, RefreshTokenRequest } from './types'
 export * from './types'
 export * from './enums'
 export * from './models'
+export { StravaApiError }
 
 export class Strava {
   private readonly request: Request

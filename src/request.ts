@@ -1,5 +1,3 @@
-import fetch, { BodyInit } from 'node-fetch'
-
 import { AccessToken, RefreshTokenRequest } from './types'
 import { Oauth } from './resources/oauth'
 
@@ -10,7 +8,39 @@ type RequestParams = {
   access_token?: string
 }
 
+type FetchBody = string | URLSearchParams | FormData | any
+
+type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch'
+
+function buildQueryString(params: Record<string, any>): string {
+  const searchParams = new URLSearchParams()
+
+  for (const [key, value] of Object.entries(params)) {
+    if (value === undefined || value === null) continue
+
+    if (Array.isArray(value)) {
+      value.forEach(item => searchParams.append(key, String(item)))
+    } else {
+      searchParams.append(key, String(value))
+    }
+  }
+
+  return searchParams.toString()
+}
+
+export class StravaApiError extends Error {
+  constructor(
+    public status: number,
+    public statusText: string,
+    public data?: any,
+  ) {
+    super(`Strava API Error ${status}: ${statusText}`)
+    this.name = 'StravaApiError'
+  }
+}
+
 export class Request {
+  private static readonly TOKEN_EXPIRY_BUFFER_SECONDS = 300 // 5 minutes
   readonly oauth = new Oauth()
 
   constructor(
@@ -19,7 +49,11 @@ export class Request {
   ) {}
 
   private async getAccessToken(): Promise<string> {
-    if (!this.token || this.token.expires_at < new Date().getTime() / 1000) {
+    const now = new Date().getTime() / 1000
+    const expiryWithBuffer =
+      (this.token?.expires_at ?? 0) - Request.TOKEN_EXPIRY_BUFFER_SECONDS
+
+    if (!this.token || expiryWithBuffer < now) {
       const token = await this.oauth.refreshTokens({
         client_id: this.config.client_id,
         client_secret: this.config.client_secret,
@@ -31,23 +65,24 @@ export class Request {
     return this.token.access_token
   }
 
-  public async makeApiRequest<Response>(
-    method: string,
+  public async makeApiRequest<T>(
+    method: HttpMethod,
     uri: string,
     params?: RequestParams,
-  ): Promise<Response> {
+  ): Promise<T> {
     const token = params?.access_token || (await this.getAccessToken())
-    const query: string =
+    const queryString =
       params?.query && Object.keys(params.query).length
-        ? `?${new URLSearchParams(params?.query)}`
+        ? buildQueryString(params.query)
         : ''
+    const query = queryString ? `?${queryString}` : ''
     const headers = {
       Authorization: `Bearer ${token}`,
       'content-type': 'application/json',
       ...(params?.headers ? params.headers : {}),
     }
 
-    let body: BodyInit | undefined
+    let body: FetchBody | undefined
 
     if (params?.body) {
       if (headers['content-type'] === 'application/json')
@@ -65,13 +100,33 @@ export class Request {
     )
 
     if (!response.ok) {
-      throw response
+      let errorData: any
+      const contentType = response.headers.get('content-type')
+
+      try {
+        if (contentType?.includes('application/json')) {
+          errorData = await response.json()
+        } else {
+          errorData = await response.text()
+        }
+      } catch {
+        errorData = undefined
+      }
+
+      throw new StravaApiError(response.status, response.statusText, errorData)
     }
 
     if (response.status !== 204) {
-      return (await response.json()) as Response
+      const contentType = response.headers.get('content-type')
+
+      if (contentType?.includes('application/json')) {
+        return (await response.json()) as T
+      }
+
+      // For non-JSON responses (like GPX/TCX files)
+      return (await response.text()) as T
     }
 
-    return (response as unknown) as Response
+    return response as T
   }
 }

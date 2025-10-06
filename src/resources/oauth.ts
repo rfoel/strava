@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 import { AppConfig, RefreshTokenRequest, RefreshTokenResponse } from '../types'
 
 export class Oauth {
