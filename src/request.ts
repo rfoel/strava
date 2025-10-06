@@ -1,4 +1,4 @@
-import { AccessToken, RefreshTokenRequest } from './types'
+import { AccessToken, RateLimit, RefreshTokenRequest } from './types'
 import { Oauth } from './resources/oauth'
 
 type RequestParams = {
@@ -28,6 +28,15 @@ function buildQueryString(params: Record<string, any>): string {
   return searchParams.toString()
 }
 
+function parseRateLimitHeader(header: string | null): [number, number] | null {
+  if (!header) return null
+  const parts = header.split(',').map((s) => parseInt(s.trim(), 10))
+  if (parts.length === 2 && !parts.some(isNaN)) {
+    return [parts[0], parts[1]]
+  }
+  return null
+}
+
 export class StravaApiError extends Error {
   constructor(
     public status: number,
@@ -42,6 +51,7 @@ export class StravaApiError extends Error {
 export class Request {
   private static readonly TOKEN_EXPIRY_BUFFER_SECONDS: number = 300 // 5 minutes
   readonly oauth: Oauth = new Oauth()
+  private rateLimit: RateLimit | null = null
 
   constructor(
     readonly config: RefreshTokenRequest,
@@ -63,6 +73,34 @@ export class Request {
       this.config.on_token_refresh?.(token)
     }
     return this.token.access_token
+  }
+
+  private updateRateLimitFromHeaders(headers: Headers): void {
+    const limitHeader = headers.get('x-ratelimit-limit')
+    const usageHeader = headers.get('x-ratelimit-usage')
+
+    const limits = parseRateLimitHeader(limitHeader)
+    const usage = parseRateLimitHeader(usageHeader)
+
+    if (limits && usage) {
+      this.rateLimit = {
+        shortTermLimit: limits[0],
+        longTermLimit: limits[1],
+        shortTermUsage: usage[0],
+        longTermUsage: usage[1],
+        timestamp: Date.now(),
+      }
+
+      this.config.on_rate_limit_update?.(this.rateLimit)
+    }
+  }
+
+  /**
+   * Get the current rate limit information
+   * @returns Current rate limit information or null if not available yet
+   */
+  public getRateLimit(): RateLimit | null {
+    return this.rateLimit
   }
 
   public async makeApiRequest<T>(
@@ -98,6 +136,9 @@ export class Request {
         headers,
       },
     )
+
+    // Update rate limit info from response headers
+    this.updateRateLimitFromHeaders(response.headers)
 
     if (!response.ok) {
       let errorData: any

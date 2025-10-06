@@ -61,4 +61,12 @@ export class Strava {
     config.on_token_refresh?.(tokenExchangeResponse)
     return new Strava(config, tokenExchangeResponse)
   }
+
+  /**
+   * Get the current API rate limit information
+   * @returns Current rate limit information or null if no API calls have been made yet
+   */
+  getRateLimit() {
+    return this.request.getRateLimit()
+  }
 }

@@ -134,6 +134,56 @@ try {
 }
 ```
 
+### API Rate Limits
+
+The Strava API has rate limits: 200 requests per 15 minutes and 2,000 requests per day.
+This library automatically tracks rate limit information from API responses.
+
+You can access rate limit information in two ways:
+
+**1. Using the `getRateLimit()` method:**
+
+```javascript
+const strava = new Strava({
+  client_id: '123',
+  client_secret: 'abc',
+  refresh_token: 'def',
+})
+
+await strava.activities.getLoggedInAthleteActivities()
+
+const rateLimit = strava.getRateLimit()
+if (rateLimit) {
+  console.log(`Short term: ${rateLimit.shortTermUsage}/${rateLimit.shortTermLimit}`)
+  console.log(`Daily: ${rateLimit.longTermUsage}/${rateLimit.longTermLimit}`)
+}
+```
+
+**2. Using the `on_rate_limit_update` callback:**
+
+```javascript
+const strava = new Strava({
+  client_id: '123',
+  client_secret: 'abc',
+  refresh_token: 'def',
+  on_rate_limit_update: (rateLimit) => {
+    console.log('Rate limit updated:', rateLimit)
+
+    // Check if approaching limits
+    if (rateLimit.shortTermUsage > rateLimit.shortTermLimit * 0.9) {
+      console.warn('Approaching 15-minute rate limit!')
+    }
+  },
+})
+```
+
+The `RateLimit` object contains:
+- `shortTermLimit` - 15-minute request limit
+- `shortTermUsage` - Current 15-minute usage
+- `longTermLimit` - Daily request limit
+- `longTermUsage` - Current daily usage
+- `timestamp` - When the rate limit was last updated
+
 ## Contributing
 
 Issues and pull requests are welcome.
