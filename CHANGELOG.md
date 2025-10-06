@@ -1,3 +1,21 @@
+# [3.0.0](https://github.com/rfoel/strava/compare/v2.3.0...v3.0.0) (2025-10-06)
+
+
+### Bug Fixes
+
+* update sdk based on strava docs changes ([9d52c55](https://github.com/rfoel/strava/commit/9d52c556375a86fce8cb2305f4a34379f94f0997))
+
+
+### Features
+
+* add better error handling ([cbd8ee5](https://github.com/rfoel/strava/commit/cbd8ee517ca7d8d20c8d09069540a09f4738de64))
+
+
+### BREAKING CHANGES
+
+* requires node >= v18, error responses changed.
+* getPhotosByActivityId no longer exists, type is renamed to sport_type, typo in segments (ridding -> riding), cursor-based pagination for GetCommentsByActivityIdRequest added.
+
 # [2.3.0](https://github.com/rfoel/strava/compare/v2.2.2...v2.3.0) (2024-03-15)
 
 ### Features
