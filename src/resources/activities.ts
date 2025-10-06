@@ -11,7 +11,7 @@ import { Request } from '../request'
 
 export type CreateActivityRequest = {
   name: string
-  type: ActivityType
+  sport_type: ActivityType
   start_date_local: string
   elapsed_time: number
   description?: string
@@ -28,7 +28,8 @@ export type GetActivityByIdRequest = {
 export type GetCommentsByActivityIdRequest = {
   id: number
   page?: number
-  per_page?: number
+  page_size?: number
+  after_cursor?: string
 }
 
 export type GetKudoersByActivityIdRequest = {
@@ -39,12 +40,6 @@ export type GetKudoersByActivityIdRequest = {
 
 export type GetLapsByActivityIdRequest = {
   id: number
-}
-
-export type GetPhotosByActivityIdRequest = {
-  id: number
-  photo_sources?: boolean
-  size?: number
 }
 
 export type GetZonesByActivityIdRequest = {
@@ -61,7 +56,7 @@ export type GetLoggedInAthleteActivitiesRequest = {
 export type UpdateActivityByIdRequest = {
   id: number
   name?: string
-  type?: ActivityType
+  sport_type?: ActivityType
   start_date_local?: string
   elapsed_time?: number
   description?: string
@@ -132,18 +127,6 @@ export class Activities {
       'get',
       `/activities/${id}/laps`,
       { query },
-    )
-  }
-
-  async getPhotosByActivityId(
-    params: GetPhotosByActivityIdRequest,
-    access_token?: string,
-  ): Promise<Lap[]> {
-    const { id, ...query } = params
-    return await this.request.makeApiRequest<Lap[]>(
-      'get',
-      `/activities/${id}/photos`,
-      { query, access_token },
     )
   }
 

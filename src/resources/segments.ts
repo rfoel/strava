@@ -1,7 +1,7 @@
 import { DetailedSegment, ExplorerResponse, SummarySegment } from '../models'
 import { Request } from '../request'
 
-export type ActivityType = 'running' | 'ridding'
+export type ActivityType = 'running' | 'riding'
 
 export type ExploreSegmentsRequest = {
   bounds: string
