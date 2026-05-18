@@ -14,7 +14,7 @@
     [
       "@semantic-release/exec",
       {
-        "publishCmd": "npm publish release/strava-${nextRelease.version}.tgz --provenance --access public"
+        "publishCmd": "npm publish ./release/strava-${nextRelease.version}.tgz --provenance --access public"
       }
     ],
     [
