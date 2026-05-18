@@ -1,7 +1,5 @@
 {
-  "branches": [
-    "main"
-  ],
+  "branches": ["main"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
@@ -9,7 +7,14 @@
     [
       "@semantic-release/npm",
       {
+        "npmPublish": false,
         "tarballDir": "release"
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "npm publish release/*.tgz --provenance --access public"
       }
     ],
     [
