@@ -1,72 +1,40 @@
-import { Request, StravaApiError } from './request'
-import {
+export { Strava } from './strava'
+export { OAuth } from './oauth'
+export type {
+  AuthorizeUrlParams,
+  ExchangeParams,
+  RefreshParams,
+  DeauthorizeParams,
+} from './oauth'
+export { StravaApiError, type Fault } from './errors'
+export type {
+  AccessToken,
+  RateLimit,
+  Scope,
+  StravaConfig,
+  TokenResponse,
+} from './types'
+export type {
   Activities,
   Athletes,
   Clubs,
+  CreateActivityParams,
+  CreateUploadParams,
   Gears,
   Routes,
-  RunningRaces,
   SegmentEfforts,
   Segments,
+  SegmentStreamKey,
   Streams,
-  Subscriptions,
+  StreamKey,
+  UpdateActivityParams,
   Uploads,
 } from './resources'
-import { Oauth } from './resources/oauth'
-import { AccessToken, AppConfig, RefreshTokenRequest } from './types'
-
-export * from './types'
-export * from './enums'
-export * from './models'
-export { StravaApiError }
-
-export class Strava {
-  private readonly request: Request
-  readonly activities: Activities
-  readonly athletes: Athletes
-  readonly clubs: Clubs
-  readonly gears: Gears
-  readonly oauth: Oauth
-  readonly routes: Routes
-  readonly runningRaces: RunningRaces
-  readonly segmentEfforts: SegmentEfforts
-  readonly segments: Segments
-  readonly streams: Streams
-  readonly subscriptions: Subscriptions
-  readonly uploads: Uploads
-
-  constructor(config: RefreshTokenRequest, access_token?: AccessToken)
-  constructor(config: AppConfig, access_token: AccessToken)
-  constructor(config: RefreshTokenRequest, access_token?: AccessToken) {
-    this.request = new Request(config, access_token)
-    this.activities = new Activities(this.request)
-    this.athletes = new Athletes(this.request)
-    this.clubs = new Clubs(this.request)
-    this.gears = new Gears(this.request)
-    this.oauth = this.request.oauth
-    this.routes = new Routes(this.request)
-    this.runningRaces = new RunningRaces(this.request)
-    this.segmentEfforts = new SegmentEfforts(this.request)
-    this.segments = new Segments(this.request)
-    this.streams = new Streams(this.request)
-    this.subscriptions = new Subscriptions(this.request)
-    this.uploads = new Uploads(this.request)
-  }
-
-  static async createFromTokenExchange(
-    config: AppConfig,
-    code: string,
-  ): Promise<Strava> {
-    const tokenExchangeResponse = await Oauth.tokenExchange(config, code)
-    config.on_token_refresh?.(tokenExchangeResponse)
-    return new Strava(config, tokenExchangeResponse)
-  }
-
-  /**
-   * Get the current API rate limit information
-   * @returns Current rate limit information or null if no API calls have been made yet
-   */
-  getRateLimit() {
-    return this.request.getRateLimit()
-  }
-}
+export {
+  Subscriptions,
+  type Subscription,
+  type SubscriptionEvent,
+  type CreateSubscriptionParams,
+} from './subscriptions'
+export type * from './generated/types.gen'
+export type { HttpClient } from './client'

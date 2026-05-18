@@ -4,13 +4,18 @@
   "description": "This library is a fully typed JavaScript wrapper of the Strava JSON API",
   "type": "module",
   "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "repository": {
@@ -34,13 +39,14 @@
     "dev": "tsdown --watch",
     "lint": "eslint src",
     "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate": "curl -sL https://developers.strava.com/swagger/swagger.json -o openapi/swagger.json && swagger2openapi openapi/swagger.json -o openapi/strava.json --patch && node scripts/patch-openapi.mjs openapi/strava.json && openapi-ts",
     "prepare": "npm run build"
-  },
-  "dependencies": {
-    "form-data": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
+    "@hey-api/openapi-ts": "^0.97.2",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
@@ -51,9 +57,11 @@
     "eslint": "^9.0.0",
     "prettier": "^3.0.0",
     "semantic-release": "^24.0.0",
-    "tsdown": "^0.15.0",
+    "swagger2openapi": "^7.0.8",
+    "tsdown": "^0.22.0",
     "typescript": "^5.7.0",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^4.1.6"
   },
   "files": [
     "dist"

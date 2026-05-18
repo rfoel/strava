@@ -3,30 +3,20 @@
 [![npm](https://img.shields.io/npm/v/strava)](https://www.npmjs.com/strava)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/strava)](https://www.npmjs.com/strava)
 [![NPM](https://img.shields.io/npm/l/strava)](LICENSE)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-This library is a fully typed JavaScript wrapper of the [Strava JSON API](https://developers.strava.com/docs/reference/).
+Fully typed JavaScript client for the [Strava API](https://developers.strava.com/docs/reference/). Types are generated from Strava's official OpenAPI spec with [`@hey-api/openapi-ts`](https://heyapi.dev/); the resource layer is hand-written for a flat, ergonomic call shape.
 
-## Installation
+## Install
 
-To install the package, run:
-
-```
+```bash
 npm install strava
 ```
 
-or
+Requires Node 18+ (uses native `fetch` / `FormData`).
 
-```
-yarn add strava
-```
+## Quick start
 
-## Usage
-
-The library can be initialized with a refresh token and optionally an access token.
-If these are not available, see below (**Token exchange**).
-
-```javascript
+```ts
 import { Strava } from 'strava'
 
 const strava = new Strava({
@@ -35,159 +25,146 @@ const strava = new Strava({
   refresh_token: 'def',
 })
 
-try {
-  const activities = await strava.activities.getLoggedInAthleteActivities()
-  console.log(activities)
-} catch (error) {
-  console.log(error)
-}
+const activities = await strava.activities.getLoggedInAthleteActivities()
+
+const activity = await strava.activities.getActivityById(12345, {
+  include_all_efforts: true,
+})
+
+const stats = await strava.athletes.getStats(987)
 ```
 
-### Refreshing the access token
+Path IDs are positional. Everything else (query, body) lives in a single options object — Stripe-style.
 
-This library will automatically refresh the access token when needed.
-In order to store the token, you can use the `on_token_refresh` callback.
-This received an `AccessToken` object (consisting of `access_token`, `expires_at`, and `refresh_token`).
-Note that the refresh token as returned by this call can sometimes change,
-at which point the old token becomes invalid.
+The client refreshes the access token automatically when it's missing or near expiry. Provide an `access_token` to skip the initial refresh:
 
-An `AccessToken` object can also be passed as a second argument to the Strava constructor.
-This can save an initial token refresh.
-As `AccessToken` contains a refresh token,
-the first argument does not need to contain a refresh token.
+```ts
+const strava = new Strava({
+  client_id: '123',
+  client_secret: 'abc',
+  access_token: {
+    access_token: '...',
+    refresh_token: '...',
+    expires_at: 1735689600,
+  },
+  on_token_refresh: (token) => {
+    db.set('strava_token', token)
+  },
+})
+```
 
-```javascript
+## Authorization code exchange
+
+```ts
 import { Strava } from 'strava'
 
-const strava = new Strava(
-  {
-    client_id: '123',
-    client_secret: 'abc',
-
-    on_token_refresh: (response) => {
-      cache.accessToken = response
-    },
-  },
-  cache.accessToken,
+const { strava, token } = await Strava.fromAuthorizationCode(
+  { client_id: '123', client_secret: 'abc' },
+  code,
 )
+
+if (token.athlete) console.log('first login by', token.athlete.id)
 ```
 
-### Token exchange
+For building the authorize URL:
 
-When a user logs in for the first time, you will need to perform authorization with OAuth.
-This involves sending the user to <https://www.strava.com/oauth/authorize>,
-and receiving the auth code as a query parameter.
+```ts
+import { OAuth } from 'strava'
 
-This can be used as follows:
-
-```javascript
-import { Strava } from 'strava'
-
-try {
-  const strava = await Strava.createFromTokenExchange(
-    {
-      client_id: '123',
-      client_secret: 'abc',
-    },
-    token,
-  )
-
-  const activities = await strava.activities.getLoggedInAthleteActivities()
-  console.log(activities)
-} catch (error) {
-  console.log(error)
-}
-```
-
-### Getting athlete info
-
-When a user logs in for the first time, the Strava API returns information about the newly logged-in user.
-This can be read using the on_token_refresh callback.
-Note that this will only ever be provided on the initial token exchange,
-before the promise returned from `Strava.createFromTokenExchange` returns.
-When the `on_token_refresh` callback is called again after the token expires,
-`response.athlete` will always be undefined.
-
-```javascript
-import { Strava } from 'strava'
-
-try {
-  const strava = await Strava.createFromTokenExchange(
-    {
-      client_id: '123',
-      client_secret: 'abc',
-      on_token_refresh: (response) => {
-        if (response.athlete) {
-          console.log(response.athlete)
-        }
-
-        db.set('refresh_token', response.refresh_token)
-      },
-    },
-    token,
-  )
-
-  const activities = await strava.activities.getLoggedInAthleteActivities()
-  console.log(activities)
-} catch (error) {
-  console.log(error)
-}
-```
-
-### API Rate Limits
-
-The Strava API has rate limits: 200 requests per 15 minutes and 2,000 requests per day.
-This library automatically tracks rate limit information from API responses.
-
-You can access rate limit information in two ways:
-
-**1. Using the `getRateLimit()` method:**
-
-```javascript
-const strava = new Strava({
+const url = new OAuth().authorizeUrl({
   client_id: '123',
-  client_secret: 'abc',
-  refresh_token: 'def',
-})
-
-await strava.activities.getLoggedInAthleteActivities()
-
-const rateLimit = strava.getRateLimit()
-if (rateLimit) {
-  console.log(`Short term: ${rateLimit.shortTermUsage}/${rateLimit.shortTermLimit}`)
-  console.log(`Daily: ${rateLimit.longTermUsage}/${rateLimit.longTermLimit}`)
-}
-```
-
-**2. Using the `on_rate_limit_update` callback:**
-
-```javascript
-const strava = new Strava({
-  client_id: '123',
-  client_secret: 'abc',
-  refresh_token: 'def',
-  on_rate_limit_update: (rateLimit) => {
-    console.log('Rate limit updated:', rateLimit)
-
-    // Check if approaching limits
-    if (rateLimit.shortTermUsage > rateLimit.shortTermLimit * 0.9) {
-      console.warn('Approaching 15-minute rate limit!')
-    }
-  },
+  redirect_uri: 'https://app.example.com/oauth/callback',
+  scope: ['read', 'activity:read_all'],
 })
 ```
 
-The `RateLimit` object contains:
-- `shortTermLimit` - 15-minute request limit
-- `shortTermUsage` - Current 15-minute usage
-- `longTermLimit` - Daily request limit
-- `longTermUsage` - Current daily usage
-- `timestamp` - When the rate limit was last updated
+## Rate limits
 
-## Contributing
+```ts
+strava.getRateLimit()
+// { shortTermLimit, shortTermUsage, longTermLimit, longTermUsage, timestamp }
+```
 
-Issues and pull requests are welcome.
+Or via callback:
+
+```ts
+new Strava({
+  client_id,
+  client_secret,
+  refresh_token,
+  on_rate_limit_update: (rl) => console.log(rl),
+})
+```
+
+## Errors
+
+Non-2xx responses throw `StravaApiError` with `status`, `statusText`, and `data` (parsed `Fault` when JSON).
+
+```ts
+import { StravaApiError } from 'strava'
+
+try {
+  await strava.activities.getActivityById(1)
+} catch (e) {
+  if (e instanceof StravaApiError) console.log(e.status, e.data)
+}
+```
+
+## Uploads
+
+```ts
+import { readFileSync } from 'node:fs'
+
+const file = new Blob([readFileSync('ride.fit')])
+const upload = await strava.uploads.createUpload({
+  file,
+  data_type: 'fit',
+  name: 'Morning ride',
+})
+```
+
+## Push subscriptions (webhooks)
+
+Not in the OpenAPI spec; hand-typed module:
+
+```ts
+const sub = await strava.subscriptions.create({
+  callback_url: 'https://app.example.com/strava/webhook',
+  verify_token: 'STRAVA',
+})
+
+await strava.subscriptions.list()
+await strava.subscriptions.delete(sub.id)
+```
+
+## Raw HTTP
+
+For ops not wrapped, drop down to the typed HTTP layer:
+
+```ts
+const data = await strava.http.request<MyResponse>('GET', '/some/path', {
+  query: { foo: 'bar' },
+})
+```
+
+## Development
+
+```bash
+npm install
+npm test           # vitest run
+npm run test:watch
+npm run lint
+npm run build
+```
+
+## Regenerating types
+
+```bash
+npm run generate
+```
+
+Downloads `swagger.json`, converts to OpenAPI 3, patches known spec bugs, and regenerates `src/generated/types.gen.ts`. The output is committed — contributors don't need to run this unless the spec changes.
 
 ## License
 
-[MIT](https://github.com/rfoel/strava/blob/master/LICENSE)
+[MIT](LICENSE)
