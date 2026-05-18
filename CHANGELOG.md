@@ -1,3 +1,19 @@
+# [4.0.0](https://github.com/rfoel/strava/compare/v3.1.0...v4.0.0) (2026-05-18)
+
+
+* feat!: rewrite around generated types and flat-arg resources ([6950e03](https://github.com/rfoel/strava/commit/6950e0313d16335d2d6d5725de39177914b3ebad))
+
+
+### Bug Fixes
+
+* regenerate lockfile on linux to include cross-platform optional deps ([4bd63c4](https://github.com/rfoel/strava/commit/4bd63c4548884b9d812740c1dc593bfc52969449))
+* regenerate lockfile to resolve vite/yaml peer mismatch ([2326ce5](https://github.com/rfoel/strava/commit/2326ce565779ed742331eb4d3458207074151649))
+
+
+### BREAKING CHANGES
+
+* Public API redesigned. Resource methods now take positional path IDs and a single options object instead of `{ id, ...rest }`. Constructor accepts a `StravaConfig` object; `createFromTokenExchange` is replaced by `Strava.fromAuthorizationCode`. Generated schema types (DetailedAthlete, SummaryActivity, etc.) are now exported from the entry point; old hand-rolled enums and models are removed. The `Subscriptions` API is now mounted at `strava.subscriptions`. Requires Node 18+.
+
 # [3.1.0](https://github.com/rfoel/strava/compare/v3.0.0...v3.1.0) (2025-10-06)
 
 
